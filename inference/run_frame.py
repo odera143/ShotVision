@@ -9,7 +9,7 @@ from .detect import detect_players_ball
 from .possession import infer_possession
 
 
-def draw_possession_box(image_path: str, bbox_xyxy, output_path: str) -> str:
+def draw_bounding_boxes(image_path: str, pos_bbox_xyxy, players, output_path: str) -> str:
     try:
         import cv2
     except ModuleNotFoundError as exc:
@@ -21,7 +21,8 @@ def draw_possession_box(image_path: str, bbox_xyxy, output_path: str) -> str:
     if img is None:
         raise ValueError(f"Could not read image: {image_path}")
 
-    x1, y1, x2, y2 = [int(v) for v in bbox_xyxy]
+    # Draw ball handler bbox
+    x1, y1, x2, y2 = [int(v) for v in pos_bbox_xyxy]
     cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
     cv2.putText(
         img,
@@ -33,6 +34,13 @@ def draw_possession_box(image_path: str, bbox_xyxy, output_path: str) -> str:
         2,
         cv2.LINE_AA,
     )
+
+    # Draw all player bboxes
+    for p in players:
+        x1, y1, x2, y2 = [int(v) for v in p.xyxy]
+        if (x1, y1, x2, y2) == (int(pos_bbox_xyxy[0]), int(pos_bbox_xyxy[1]), int(pos_bbox_xyxy[2]), int(pos_bbox_xyxy[3])):
+            continue  # Skip ball handler (already drawn)
+        cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
 
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -61,7 +69,7 @@ def main():
 
     overlay_image = None
     if args.out_image is not None and poss_bbox is not None:
-        overlay_image = draw_possession_box(args.image, poss_bbox, args.out_image)
+        overlay_image = draw_bounding_boxes(args.image, poss_bbox, players, args.out_image)
 
     out = {
         "image": args.image,
@@ -77,6 +85,12 @@ def main():
             "player_bbox_xyxy": poss_bbox,
             "player_foot_xy": (foot_x, foot_y) if foot_x is not None and foot_y is not None else None,
         },
+        "player_detections": [{
+            "cls_id": p.cls_id,
+            "conf": p.conf,
+            "xyxy": p.xyxy,
+            "foot_xy": ((p.xyxy[0] + p.xyxy[2]) / 2, p.xyxy[3])  # Approx foot position as center-bottom of bbox
+        } for p in players],
         "overlay_image": overlay_image,
     }
 
