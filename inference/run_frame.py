@@ -56,6 +56,8 @@ def main():
     players, ball = detect_players_ball(model, args.image, imgsz=args.imgsz, conf=args.conf, iou=args.iou)
     poss = infer_possession(players, ball)
     poss_bbox = list(players[poss.player_index].xyxy) if poss.player_index is not None else None
+    foot_x = (poss_bbox[0] + poss_bbox[2]) / 2 if poss_bbox is not None else None
+    foot_y = poss_bbox[3] if poss_bbox is not None else None
 
     overlay_image = None
     if args.out_image is not None and poss_bbox is not None:
@@ -73,6 +75,7 @@ def main():
             "confidence": poss.confidence,
             "reason": poss.reason,
             "player_bbox_xyxy": poss_bbox,
+            "player_foot_xy": (foot_x, foot_y) if foot_x is not None and foot_y is not None else None,
         },
         "overlay_image": overlay_image,
     }

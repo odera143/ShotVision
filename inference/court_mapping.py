@@ -57,6 +57,11 @@ for angle in range(-70, 71, 5):
 
     cv2.circle(img, (px, py), 2, (255,0,0), -1)
 
+# player foot pos
+cv2.circle(img, (1326, 779), 2, (255,0,225), -1)
+
+print(img_to_court(1326, 779))
+
 cv2.imshow("homography check", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
