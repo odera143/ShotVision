@@ -41,6 +41,12 @@ def draw_bounding_boxes(image_path: str, pos_bbox_xyxy, players, output_path: st
         if (x1, y1, x2, y2) == (int(pos_bbox_xyxy[0]), int(pos_bbox_xyxy[1]), int(pos_bbox_xyxy[2]), int(pos_bbox_xyxy[3])):
             continue  # Skip ball handler (already drawn)
         cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
+    
+    # Mark all player foot positions
+    for p in players:
+        foot_x = int((p.xyxy[0] + p.xyxy[2]) / 2)
+        foot_y = int(p.xyxy[3])
+        cv2.circle(img, (foot_x, foot_y), 5, (255, 0, 255), -1)
 
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
