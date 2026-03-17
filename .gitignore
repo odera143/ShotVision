@@ -22,8 +22,7 @@ env/
 .ipynb_checkpoints/
 
 # Project data/artifacts
-dataset/
-full-dataset/
+*dataset*/
 runs/
 outputs/
 notebooks/
