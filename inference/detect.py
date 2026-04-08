@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 from ultralytics import YOLO
 
 @dataclass
@@ -22,15 +22,23 @@ def _to_det(result) -> List[Det]:
 
 def detect_players_ball(
     model: YOLO,
-    image_path: str,
+    image_source: Any,
     imgsz: int = 1280,
     conf: float = 0.15,
     iou: float = 0.45,
+    device: str = "",
 ) -> Tuple[List[Det], Optional[Det]]:
     """
     Returns (players, ball). Ball is the highest-confidence ball detection (if any).
     """
-    results = model.predict(source=image_path, imgsz=imgsz, conf=conf, iou=iou, verbose=False)
+    results = model.predict(
+        source=image_source,
+        imgsz=imgsz,
+        conf=conf,
+        iou=iou,
+        device=device or None,
+        verbose=False,
+    )
     dets = _to_det(results[0])
 
     players = [d for d in dets if d.cls_id == 0]
