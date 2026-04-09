@@ -46,6 +46,7 @@ def render_overlay(
     players,
     handler_court_xy=None,
     paint_quad=None,
+    possession_label: str = "Ball Handler",
 ) -> np.ndarray:
     img = image.copy()
 
@@ -55,7 +56,7 @@ def render_overlay(
         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
         cv2.putText(
             img,
-            "Ball Handler",
+            possession_label,
             (x1, max(20, y1 - 10)),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.8,
@@ -228,6 +229,7 @@ def process_frame(
             players,
             handler_court_xy=handler_court_xy,
             paint_quad=paint_quad,
+            possession_label="Ball Handler",
         )
         overlay_image = save_overlay_image(overlay, out_image)
 
