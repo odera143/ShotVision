@@ -23,6 +23,17 @@ def _top_half_center(xyxy: Tuple[float, float, float, float]) -> Tuple[float, fl
 def _height(xyxy: Tuple[float, float, float, float]) -> float:
     return max(1.0, xyxy[3] - xyxy[1])
 
+def _width(xyxy: Tuple[float, float, float, float]) -> float:
+    return max(1.0, xyxy[2] - xyxy[0])
+
+def _possession_threshold(xyxy: Tuple[float, float, float, float]) -> float:
+    h = max(130.0, _height(xyxy))
+    w = _width(xyxy)
+    # The broadcast angle is fairly consistent, so clamp to a minimum
+    # effective height while still using width to reduce brittleness when the
+    # handler is partially occluded.
+    return max(40.0, 0.30 * h + 0.25 * w)
+
 def infer_possession(players: List[Det], ball: Optional[Det]) -> PossessionResult:
     if ball is None:
         return PossessionResult(player_index=None, confidence=0.0, reason="no_ball")
@@ -39,8 +50,7 @@ def infer_possession(players: List[Det], ball: Optional[Det]) -> PossessionResul
         px, py = _top_half_center(p.xyxy)
         d = math.hypot(bx - px, by - py)
 
-        # Threshold scales with player height (broadcast zoom changes)
-        thresh = 0.35 * _height(p.xyxy)
+        thresh = _possession_threshold(p.xyxy)
 
         if d < best_d:
             best_d = d
