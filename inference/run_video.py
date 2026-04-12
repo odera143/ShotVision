@@ -12,6 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from inference.run_frame import load_models, process_frame, render_overlay
+from inference.temporal_possession import TemporalPossessionState, smooth_possession
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,6 +31,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--frame-step", type=int, default=1, help="Process every Nth frame")
     parser.add_argument("--max-frames", type=int, default=0, help="Optional max number of processed frames")
     parser.add_argument("--no-overlay-video", action="store_true", help="Skip writing the overlayed output video")
+    parser.add_argument("--hold-frames", type=int, default=8, help="How many uncertain frames to carry handler possession")
+    parser.add_argument("--max-match-distance", type=float, default=140.0, help="Max pixel distance for nearest-player smoothing")
     return parser.parse_args()
 
 
@@ -83,6 +86,7 @@ def main() -> None:
         "paint_homography_available": 0,
     }
     results: list[dict] = []
+    state = TemporalPossessionState()
 
     try:
         while True:
@@ -127,23 +131,34 @@ def main() -> None:
                 paint_conf=args.paint_conf,
                 device=args.device,
             )
+            smoothed_possession, state = smooth_possession(
+                result,
+                state,
+                hold_frames=args.hold_frames,
+                max_match_distance_px=args.max_match_distance,
+            )
+            result["smoothed_possession"] = smoothed_possession
             result["frame_index"] = frame_index
             results.append(result)
             (json_dir / f"frame_{frame_index:06d}.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
 
             counts["frames_processed"] += 1
             counts["ball_detected"] += int(bool(result["detections"]["ball_detected"]))
-            counts["possession_found"] += int(result["possession"]["player_index"] is not None)
-            counts["court_xy_found"] += int(result["possession"]["player_foot_court_xy"] is not None)
+            counts["possession_found"] += int(smoothed_possession["player_bbox_xyxy"] is not None)
+            counts["court_xy_found"] += int(smoothed_possession["player_foot_court_xy"] is not None)
             counts["paint_homography_available"] += int(bool(result["paint_homography"]["available"]))
 
             if video_writer is not None:
                 overlay_frame = render_overlay(
                     frame,
-                    result["possession"]["player_bbox_xyxy"],
+                    smoothed_possession["player_bbox_xyxy"],
+                    result["detections"]["ball_xyxy"],
                     result["player_detections"],
-                    handler_court_xy=result["possession"]["player_foot_court_xy"],
+                    handler_court_xy=smoothed_possession["player_foot_court_xy"],
                     paint_quad=result["paint_homography"]["image_points"],
+                    possession_label="Ball Handler"
+                    if smoothed_possession["source"] != "smoothed"
+                    else "Ball Handler (smoothed)",
                 )
                 frame_label = f"frame {frame_index:06d}"
                 cv2.putText(
