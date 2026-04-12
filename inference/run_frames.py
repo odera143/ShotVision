@@ -97,6 +97,7 @@ def main() -> None:
             overlay = render_overlay(
                 image=frame,
                 pos_bbox_xyxy=smoothed_possession["player_bbox_xyxy"],
+                ball=result["detections"]["ball_xyxy"],
                 players=result["player_detections"],
                 handler_court_xy=smoothed_possession["player_foot_court_xy"],
                 paint_quad=result["paint_homography"]["image_points"],

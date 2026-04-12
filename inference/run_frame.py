@@ -43,6 +43,7 @@ def _extract_xyxy(det_or_dict) -> tuple[int, int, int, int]:
 def render_overlay(
     image: np.ndarray,
     pos_bbox_xyxy,
+    ball,
     players,
     handler_court_xy=None,
     paint_quad=None,
@@ -64,6 +65,11 @@ def render_overlay(
             2,
             cv2.LINE_AA,
         )
+
+    #draw ball bbox with a different color and label
+    if ball is not None:    
+        x1, y1, x2, y2 = ball
+        cv2.rectangle(img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 3)
 
     # Draw all player bboxes
     for p in players:
@@ -112,27 +118,6 @@ def save_overlay_image(image: np.ndarray, output_path: str) -> str:
     if not ok:
         raise ValueError(f"Could not write overlay image: {output_path}")
     return str(out)
-
-
-def draw_bounding_boxes(
-    image_path: str,
-    pos_bbox_xyxy,
-    players,
-    output_path: str,
-    handler_court_xy=None,
-    paint_quad=None,
-) -> str:
-    img = cv2.imread(image_path)
-    if img is None:
-        raise ValueError(f"Could not read image: {image_path}")
-    overlay = render_overlay(
-        img,
-        pos_bbox_xyxy,
-        players,
-        handler_court_xy=handler_court_xy,
-        paint_quad=paint_quad,
-    )
-    return save_overlay_image(overlay, output_path)
 
 
 def infer_paint_homography_for_frame(
@@ -226,6 +211,7 @@ def process_frame(
         overlay = render_overlay(
             frame,
             poss_bbox,
+            ball,
             players,
             handler_court_xy=handler_court_xy,
             paint_quad=paint_quad,
@@ -239,6 +225,7 @@ def process_frame(
             "num_players": len(players),
             "ball_detected": ball is not None,
             "ball_conf": float(ball.conf) if ball else None,
+            "ball_xyxy": ball.xyxy if ball else None,
         },
         "possession": {
             "player_index": poss.player_index,
