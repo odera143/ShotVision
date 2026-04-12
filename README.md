@@ -63,11 +63,11 @@ Current dependencies:
 ### Single Frame
 
 ```powershell
-.\.venv\Scripts\python.exe inference\run_frame.py `
-  --image ".\notebooks\test-frames\game5_0109.jpg" `
-  --model "<path-to-player-ball-model.pt>" `
-  --paint-model "<path-to-paint-seg-model.pt>" `
-  --paint-basket-side left `
+.\.venv\Scripts\python.exe inference\run_frame.py
+  --image ".\notebooks\test-frames\game5_0109.jpg"
+  --model "<path-to-player-ball-model.pt>"
+  --paint-model "<path-to-paint-seg-model.pt>"
+  --paint-basket-side left
   --out_image ".\outputs\game5_0109.jpg"
 ```
 
@@ -82,12 +82,12 @@ Important output field:
 ### Folder Of Frames
 
 ```powershell
-.\.venv\Scripts\python.exe inference\run_frames.py `
-  --source ".\notebooks\test-frames" `
-  --model "<path-to-player-ball-model.pt>" `
-  --paint-model "<path-to-paint-seg-model.pt>" `
-  --paint-basket-side left `
-  --output ".\runs\run-frames" `
+.\.venv\Scripts\python.exe inference\run_frames.py
+  --source ".\notebooks\test-frames"
+  --model "<path-to-player-ball-model.pt>"
+  --paint-model "<path-to-paint-seg-model.pt>"
+  --paint-basket-side left
+  --output ".\runs\run-frames"
   --save-overlays
 ```
 
@@ -100,11 +100,11 @@ Outputs:
 ### Video
 
 ```powershell
-.\.venv\Scripts\python.exe inference\run_video.py `
-  --video ".\runs\harden_to_allen.mp4" `
-  --model "<path-to-player-ball-model.pt>" `
-  --paint-model "<path-to-paint-seg-model.pt>" `
-  --paint-basket-side left `
+.\.venv\Scripts\python.exe inference\run_video.py
+  --video ".\runs\harden_to_allen.mp4"
+  --model "<path-to-player-ball-model.pt>"
+  --paint-model "<path-to-paint-seg-model.pt>"
+  --paint-basket-side left
   --output ".\runs\run-video"
 ```
 
@@ -114,7 +114,7 @@ Outputs:
 - `runs/run-video/json/frame_000000.json`, etc.
 - `runs/run-video/harden_to_allen_overlay.mp4`
 
-`--frame-step` is supported and preserves video timing in the overlay video by writing skipped frames through unchanged.
+`--frame-step` is supported and preserves video timing in the overlay video by writing skipped frames unchanged.
 
 ## Example: `harden_to_allen.mp4`
 
