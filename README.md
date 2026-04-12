@@ -127,16 +127,16 @@ Tracked example assets:
 | --- | --- |
 | [![Before clip](examples/harden_to_allen/harden_to_allen_before.jpg)](examples/harden_to_allen/harden_to_allen_before.mp4) | [![After clip](examples/harden_to_allen/harden_to_allen_after.jpg)](examples/harden_to_allen/harden_to_allen_after.mp4) |
 
-The counts below come from my most recent local run of `harden_to_allen.mp4`:
+The counts below come from the most recent local run of `harden_to_allen.mp4`:
 
 - `frames_seen`: `142`
 - `frames_processed`: `142`
-- `ball_detected`: `97`
-- `possession_found`: `44`
-- `court_xy_found`: `44`
+- `ball_detected`: `103`
+- `possession_found`: `86`
+- `court_xy_found`: `86`
 - `paint_homography_available`: `142`
 
-At the moment, that means:
+Meaning:
 
 - paint detection/homography is stable across the full clip
 - possession is still the limiting stage
