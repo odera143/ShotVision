@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import './App.css';
-import { Button, Card, Col, Container, Form, Row, Stack } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  OverlayTrigger,
+  Row,
+  Stack,
+  Tooltip,
+} from 'react-bootstrap';
 import type { ChangeEvent } from 'react';
 import type { RunInferenceOptions } from './types/RunInferenceOptions';
 
@@ -17,6 +27,32 @@ function App() {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files?.[0] || null);
   };
+
+  const renderLabelWithTooltip = (label: string, tooltip: string) => (
+    <span className='d-inline-flex align-items-center gap-2'>
+      <span>{label}</span>
+      <OverlayTrigger
+        placement='right'
+        overlay={
+          <Tooltip id={`tooltip-${label.toLowerCase().replace(/\s+/g, '-')}`}>
+            {tooltip}
+          </Tooltip>
+        }
+      >
+        <span
+          className='text-body-secondary border rounded-circle d-inline-flex align-items-center justify-content-center'
+          style={{
+            width: '1.1rem',
+            height: '1.1rem',
+            fontSize: '0.75rem',
+            cursor: 'help',
+          }}
+        >
+          ?
+        </span>
+      </OverlayTrigger>
+    </span>
+  );
 
   return (
     <Container fluid='lg' className='py-4 py-md-5 text-start'>
@@ -44,16 +80,27 @@ function App() {
                   <Form.Group className='mb-3'>
                     <Form.Check
                       type='checkbox'
-                      label='Save overlays'
+                      label={renderLabelWithTooltip(
+                        'Save overlays',
+                        'Returns an output video with detections, paint geometry, and court coordinates drawn on each frame.',
+                      )}
                       checked={options.saveOverlays}
                       onChange={(e) =>
-                        setOptions({ ...options, saveOverlays: e.target.checked })
+                        setOptions({
+                          ...options,
+                          saveOverlays: e.target.checked,
+                        })
                       }
                     />
                   </Form.Group>
 
                   <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>Basket Side</Form.Label>
+                    <Form.Label className='fw-semibold'>
+                      {renderLabelWithTooltip(
+                        'Basket Side',
+                        'Choose which side of the frame contains the visible hoop so the paint homography is oriented correctly.',
+                      )}
+                    </Form.Label>
                     <Form.Select
                       value={options.basketSide}
                       onChange={(e) =>
@@ -69,7 +116,12 @@ function App() {
                   </Form.Group>
 
                   <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>Device</Form.Label>
+                    <Form.Label className='fw-semibold'>
+                      {renderLabelWithTooltip(
+                        'Device',
+                        'Select GPU for faster inference when CUDA is available, or CPU if you want to run without the graphics card.',
+                      )}
+                    </Form.Label>
                     <Form.Select
                       value={options.device}
                       onChange={(e) =>
@@ -85,7 +137,12 @@ function App() {
                   </Form.Group>
 
                   <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>Frame Step</Form.Label>
+                    <Form.Label className='fw-semibold'>
+                      {renderLabelWithTooltip(
+                        'Frame Step',
+                        'Processes every Nth frame. Higher values run faster but skip more frames.',
+                      )}
+                    </Form.Label>
                     <Form.Control
                       type='number'
                       min={1}
@@ -100,7 +157,12 @@ function App() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label className='fw-semibold'>Hold Frames</Form.Label>
+                    <Form.Label className='fw-semibold'>
+                      {renderLabelWithTooltip(
+                        'Hold Frames',
+                        'Keeps the current ball handler for this many uncertain frames before dropping possession.',
+                      )}
+                    </Form.Label>
                     <Form.Control
                       type='number'
                       min={0}
@@ -135,7 +197,9 @@ function App() {
                   <Form.Control
                     type='file'
                     accept='.mp4'
-                    onChange={(e) => handleFileChange(e as ChangeEvent<HTMLInputElement>)}
+                    onChange={(e) =>
+                      handleFileChange(e as ChangeEvent<HTMLInputElement>)
+                    }
                   />
                   <Form.Text className='text-body-secondary'>
                     {file ? `Selected: ${file.name}` : 'No file selected yet.'}
