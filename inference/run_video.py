@@ -55,8 +55,8 @@ def create_video_writer(output_path: Path, fps: float, width: int, height: int) 
     return writer
 
 
-def main() -> None:
-    args = parse_args()
+def main(apiArgs=None) -> None:
+    args = parse_args() if apiArgs is None else apiArgs
     video_path = Path(args.video)
     capture = cv2.VideoCapture(str(video_path))
     if not capture.isOpened():
