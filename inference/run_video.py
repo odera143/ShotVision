@@ -178,8 +178,8 @@ def main(apiArgs=None) -> None:
             video_writer.release()
 
     summary = {
-        "video": str(video_path),
-        "output": str(output_root.resolve()),
+        # "video": str(video_path),
+        # "output": str(output_root.resolve()),
         "counts": counts,
         "frames": results,
     }
