@@ -4,4 +4,5 @@ export interface RunInferenceOptions {
   device: 'CPU' | 'GPU';
   frameStep: number;
   holdFrames: number;
+  resultsMode: 'FULL' | 'POSSESSION_ONLY';
 }

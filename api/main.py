@@ -9,6 +9,7 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, Query, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 from inference.run_video import main as run_video_main
@@ -26,6 +27,18 @@ PAINT_MODEL_PATH = Path(
 )
 
 app = FastAPI(title="Shot Vision API")
+ALLOWED_ORIGINS = os.getenv(
+    "ALLOWED_ORIGINS",
+    "http://localhost:5174,http://127.0.0.1:5174",
+).split(",")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[origin.strip() for origin in ALLOWED_ORIGINS if origin.strip()],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def _normalize_device(device: str) -> str:
@@ -360,8 +373,7 @@ def get_overlay_video(job_id: str) -> FileResponse:
     if not status.get("save_overlays"):
         raise HTTPException(status_code=404, detail="Overlay video was not requested for this job.")
 
-    video_name = Path(status["input_video_name"]).stem
-    overlay_path = paths["outputs"] / f"{video_name}_overlay.mp4"
+    overlay_path = paths["outputs"] / "input_overlay.mp4"
     if not overlay_path.exists():
         raise HTTPException(status_code=404, detail="Overlay video not found.")
     return FileResponse(path=overlay_path, media_type="video/mp4", filename=overlay_path.name)
