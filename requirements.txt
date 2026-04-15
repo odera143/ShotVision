@@ -1,3 +1,6 @@
 pandas
 opencv-python
 ultralytics
+uvicorn
+fastapi
+python-multipart
