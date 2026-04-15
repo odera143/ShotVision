@@ -12,6 +12,10 @@ Broadcast NBA frame/video pipeline for:
 
 The project currently works best as an inference pipeline over single frames, folders of frames, or video.
 
+There is also a lightweight React frontend for uploading videos, polling jobs, and fetching results:
+
+- [UI README](ui/README.md)
+
 Main pieces:
 
 - [detect.py](inference/detect.py): runs the player/ball detector
@@ -57,6 +61,45 @@ Current dependencies:
 - `pandas`
 - `opencv-python`
 - `ultralytics`
+- `fastapi`
+- `uvicorn`
+- `python-multipart`
+
+## API
+
+The repo now includes a FastAPI service for the UI and local job-based video inference flow:
+
+- [main.py](api/main.py)
+
+Run it locally with:
+
+```powershell
+uvicorn api.main:app --host 0.0.0.0 --port 8080 --reload
+```
+
+Useful environment variables:
+
+- `PLAYER_MODEL_PATH`
+- `PAINT_MODEL_PATH`
+- `JOB_TTL_SECONDS`
+- `ALLOWED_ORIGINS`
+
+The API currently supports:
+
+- `POST /jobs`
+  Upload a video plus inference options and queue a background job.
+- `GET /jobs/{job_id}`
+  Read job status.
+- `GET /jobs/{job_id}/results`
+  Fetch inference results in either `FULL` or `POSSESSION_ONLY` mode.
+- `GET /jobs/{job_id}/overlay-video`
+  Download the overlay video when `save_overlays` was requested.
+
+Notes:
+
+- uploaded videos and outputs are stored under `jobs/<job_id>/...`
+- jobs are temporary and cleaned up after a TTL
+- the UI currently talks to this API on `http://localhost:8080`
 
 ## Run Inference
 
@@ -123,8 +166,8 @@ Tracked example assets:
 - before video: [examples/harden_to_allen/harden_to_allen_before.mp4](examples/harden_to_allen/harden_to_allen_before.mp4)
 - after video: [examples/harden_to_allen/harden_to_allen_after.mp4](examples/harden_to_allen/harden_to_allen_after.mp4)
 
-| Before | After |
-| --- | --- |
+| Before                                                                                                                     | After                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | [![Before clip](examples/harden_to_allen/harden_to_allen_before.jpg)](examples/harden_to_allen/harden_to_allen_before.mp4) | [![After clip](examples/harden_to_allen/harden_to_allen_after.jpg)](examples/harden_to_allen/harden_to_allen_after.mp4) |
 
 The counts below come from the most recent local run of `harden_to_allen.mp4`:
@@ -162,18 +205,6 @@ For each processed frame:
 - Court coordinates are only as good as all upstream steps: detection, possession, paint segmentation, and homography.
 
 The biggest current quality issue is player truncation near the bottom/bench-side edge, because that shifts the perceived foot position.
-
-## Annotation Notes
-
-Paint segmentation:
-
-- one class: `paint`
-- YOLO segmentation format
-- dataset lives in `datasets/paint-seg`
-
-Player detection:
-
-- better labeling is likely the next highest-value improvement
 
 ## Near-Term Roadmap
 
