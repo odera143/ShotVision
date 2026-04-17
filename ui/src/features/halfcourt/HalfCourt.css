@@ -1,0 +1,17 @@
+.halfcourt-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.halfcourt-surface {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 750px;
+  max-width: 100%;
+  padding: 3rem;
+  border-radius: 0.375rem;
+  background-color: #212529;
+}
