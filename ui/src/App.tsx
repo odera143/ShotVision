@@ -14,9 +14,14 @@ import {
   Tooltip,
 } from 'react-bootstrap';
 import type { ChangeEvent } from 'react';
-import type { RunInferenceOptions } from './types/RunInferenceOptions';
-import type { InferenceJob } from './types/InferenceJob';
-import type { InferenceSummary } from './types/InferenceSummary';
+import type { RunInferenceOptions } from './features/inference/types/RunInferenceOptions';
+import type { InferenceJob } from './features/inference/types/InferenceJob';
+import type {
+  InferenceSummary,
+  PossessionOnlyInferenceSummary,
+} from './features/inference/types/InferenceSummary';
+import testInferenceResults from './test-data/results.json';
+import RenderTopDown from './features/render/RenderTopDown';
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -400,6 +405,13 @@ function App() {
               </Card.Body>
             </Card>
           )}
+          <div className='mt-4'>
+            <RenderTopDown
+              results={
+                testInferenceResults as unknown as PossessionOnlyInferenceSummary
+              }
+            />
+          </div>
         </Col>
       </Row>
     </Container>

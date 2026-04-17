@@ -1,0 +1,2628 @@
+{
+  "summary_type": "POSSESSION_ONLY",
+  "video": null,
+  "counts": {
+    "frames_seen": 177,
+    "frames_processed": 177,
+    "ball_detected": 131,
+    "possession_found": 110,
+    "court_xy_found": 110,
+    "paint_homography_available": 177
+  },
+  "frames": [
+    {
+      "frame_index": 0,
+      "image": "input.mp4:frame_000000",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1602.3408203125, 325.9869079589844, 1685.187255859375,
+          487.24273681640625
+        ],
+        "player_foot_xy": [1643.7640380859375, 487.24273681640625],
+        "player_foot_court_xy": [18.989730834960938, 24.95386505126953],
+        "confidence": 0.3305859922415961,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 1,
+      "image": "input.mp4:frame_000001",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1597.42333984375, 328.6449890136719, 1684.593505859375,
+          487.2381591796875
+        ],
+        "player_foot_xy": [1641.0084228515625, 487.2381591796875],
+        "player_foot_court_xy": [18.961734771728516, 24.871198654174805],
+        "confidence": 0.2715389919035417,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 2,
+      "image": "input.mp4:frame_000002",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1596.5013427734375, 330.3612976074219, 1684.5655517578125,
+          487.1041259765625
+        ],
+        "player_foot_xy": [1640.533447265625, 487.1041259765625],
+        "player_foot_court_xy": [18.8951358795166, 24.7749080657959],
+        "confidence": 0.2531163510206281,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 3,
+      "image": "input.mp4:frame_000003",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1596.955078125, 334.02545166015625, 1684.01220703125,
+          486.81658935546875
+        ],
+        "player_foot_xy": [1640.483642578125, 486.81658935546875],
+        "player_foot_court_xy": [18.927125930786133, 24.76886558532715],
+        "confidence": 0.15311635102062812,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 4,
+      "image": "input.mp4:frame_000004",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1596.0970458984375, 337.36407470703125, 1683.3885498046875,
+          487.15606689453125
+        ],
+        "player_foot_xy": [1639.7427978515625, 487.15606689453125],
+        "player_foot_court_xy": [18.805288314819336, 24.67344093322754],
+        "confidence": 0.13359061223040225,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 5,
+      "image": "input.mp4:frame_000005",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1591.3203125, 341.5901794433594, 1683.1279296875, 486.91424560546875
+        ],
+        "player_foot_xy": [1637.22412109375, 486.91424560546875],
+        "player_foot_court_xy": [18.6213321685791, 24.403850555419922],
+        "confidence": 0.09361183496092274,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 6,
+      "image": "input.mp4:frame_000006",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1584.233642578125, 344.4298400878906, 1681.764404296875,
+          487.1788330078125
+        ],
+        "player_foot_xy": [1632.9990234375, 487.1788330078125],
+        "player_foot_court_xy": [18.587356567382812, 24.323650360107422],
+        "confidence": 0.10024099600238479,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 7,
+      "image": "input.mp4:frame_000007",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1578.7518310546875, 346.03338623046875, 1679.5601806640625,
+          487.17364501953125
+        ],
+        "player_foot_xy": [1629.156005859375, 487.17364501953125],
+        "player_foot_court_xy": [18.62299346923828, 24.28662109375],
+        "confidence": 0.10966433060126068,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 8,
+      "image": "input.mp4:frame_000008",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1578.9964599609375, 350.1638488769531, 1679.0474853515625,
+          487.1337890625
+        ],
+        "player_foot_xy": [1629.02197265625, 487.1337890625],
+        "player_foot_court_xy": [18.77422523498535, 24.433319091796875],
+        "confidence": 0.13762264243562305,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 9,
+      "image": "input.mp4:frame_000009",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1578.52294921875, 352.00042724609375, 1678.112548828125,
+          487.20697021484375
+        ],
+        "player_foot_xy": [1628.3177490234375, 487.20697021484375],
+        "player_foot_court_xy": [18.833965301513672, 24.490352630615234],
+        "confidence": 0.18828684148323538,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 10,
+      "image": "input.mp4:frame_000010",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1579.077392578125, 353.734619140625, 1677.498779296875,
+          486.846923828125
+        ],
+        "player_foot_xy": [1628.2880859375, 486.846923828125],
+        "player_foot_court_xy": [18.87639617919922, 24.41071891784668],
+        "confidence": 0.24198158831177952,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 11,
+      "image": "input.mp4:frame_000011",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1581.853515625, 355.048583984375, 1673.97119140625, 487.1160888671875
+        ],
+        "player_foot_xy": [1627.912353515625, 487.1160888671875],
+        "player_foot_court_xy": [18.84185028076172, 24.403799057006836],
+        "confidence": 0.3508899370834532,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 12,
+      "image": "input.mp4:frame_000012",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1579.685546875, 356.33203125, 1673.988525390625, 487.7106628417969
+        ],
+        "player_foot_xy": [1626.8370361328125, 487.7106628417969],
+        "player_foot_court_xy": [18.763071060180664, 24.381240844726562],
+        "confidence": 0.3916570170315552,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 13,
+      "image": "input.mp4:frame_000013",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1576.967041015625, 353.8222961425781, 1674.39306640625,
+          487.3228454589844
+        ],
+        "player_foot_xy": [1625.6800537109375, 487.3228454589844],
+        "player_foot_court_xy": [18.79535675048828, 24.34078025817871],
+        "confidence": 0.3457657719386181,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 14,
+      "image": "input.mp4:frame_000014",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1574.8905029296875, 354.5744323730469, 1674.4808349609375,
+          487.6805419921875
+        ],
+        "player_foot_xy": [1624.6856689453125, 487.6805419921875],
+        "player_foot_court_xy": [18.744407653808594, 24.31691551208496],
+        "confidence": 0.25075870479050977,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 15,
+      "image": "input.mp4:frame_000015",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1577.0189208984375, 354.21697998046875, 1675.264892578125,
+          488.53509521484375
+        ],
+        "player_foot_xy": [1626.1419067382812, 488.53509521484375],
+        "player_foot_court_xy": [18.43735122680664, 24.292415618896484],
+        "confidence": 0.11818035119804204,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 16,
+      "image": "input.mp4:frame_000016",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1581.0283203125, 353.9127197265625, 1674.72119140625,
+          487.9064025878906
+        ],
+        "player_foot_xy": [1627.874755859375, 487.9064025878906],
+        "player_foot_court_xy": [18.59771728515625, 24.409021377563477],
+        "confidence": 0.01818035119804204,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 17,
+      "image": "input.mp4:frame_000017",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1577.78271484375, 350.23675537109375, 1674.480224609375,
+          491.2636413574219
+        ],
+        "player_foot_xy": [1626.1314697265625, 491.2636413574219],
+        "player_foot_court_xy": [18.207714080810547, 24.338552474975586],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 18,
+      "image": "input.mp4:frame_000018",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1575.338623046875, 352.14080810546875, 1675.096923828125,
+          485.03363037109375
+        ],
+        "player_foot_xy": [1625.2177734375, 485.03363037109375],
+        "player_foot_court_xy": [18.891254425048828, 24.28272247314453],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 19,
+      "image": "input.mp4:frame_000019",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1569.4052734375, 351.16656494140625, 1675.771484375, 493.3199462890625
+        ],
+        "player_foot_xy": [1622.58837890625, 493.3199462890625],
+        "player_foot_court_xy": [17.91166114807129, 24.22183609008789],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 4
+      }
+    },
+    {
+      "frame_index": 20,
+      "image": "input.mp4:frame_000020",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1564.408447265625, 354.241943359375, 1672.480224609375,
+          504.9491271972656
+        ],
+        "player_foot_xy": [1618.4443359375, 504.9491271972656],
+        "player_foot_court_xy": [16.665176391601562, 24.382551193237305],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 5
+      }
+    },
+    {
+      "frame_index": 21,
+      "image": "input.mp4:frame_000021",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1555.770263671875, 360.6964416503906, 1669.822265625, 512.818115234375
+        ],
+        "player_foot_xy": [1612.7962646484375, 512.818115234375],
+        "player_foot_court_xy": [15.758512496948242, 24.357425689697266],
+        "confidence": 0.0520337141037166,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 22,
+      "image": "input.mp4:frame_000022",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1554.484375, 363.54559326171875, 1666.251953125, 511.49517822265625
+        ],
+        "player_foot_xy": [1610.3681640625, 511.49517822265625],
+        "player_foot_court_xy": [16.400341033935547, 24.511262893676758],
+        "confidence": 0.11238383506217087,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 23,
+      "image": "input.mp4:frame_000023",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1552.292236328125, 365.564697265625, 1660.697998046875,
+          511.54974365234375
+        ],
+        "player_foot_xy": [1606.4951171875, 511.54974365234375],
+        "player_foot_court_xy": [16.377412796020508, 24.426210403442383],
+        "confidence": 0.16639380658552094,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 24,
+      "image": "input.mp4:frame_000024",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1547.0972900390625, 367.0674133300781, 1653.2047119140625,
+          511.84552001953125
+        ],
+        "player_foot_xy": [1600.1510009765625, 511.84552001953125],
+        "player_foot_court_xy": [15.694310188293457, 24.08066749572754],
+        "confidence": 0.18600459331227348,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 25,
+      "image": "input.mp4:frame_000025",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1538.9725341796875, 371.5141296386719, 1653.5504150390625,
+          513.6650390625
+        ],
+        "player_foot_xy": [1596.261474609375, 513.6650390625],
+        "player_foot_court_xy": [15.858356475830078, 23.932668685913086],
+        "confidence": 0.3450870820878027,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 26,
+      "image": "input.mp4:frame_000026",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1537.2630615234375, 373.33026123046875, 1648.3231201171875,
+          522.6280517578125
+        ],
+        "player_foot_xy": [1592.7930908203125, 522.6280517578125],
+        "player_foot_court_xy": [14.569787979125977, 23.405376434326172],
+        "confidence": 0.4237733340104469,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 27,
+      "image": "input.mp4:frame_000027",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1535.790771484375, 375.17742919921875, 1644.4912109375,
+          542.2235107421875
+        ],
+        "player_foot_xy": [1590.1409912109375, 542.2235107421875],
+        "player_foot_court_xy": [12.17679214477539, 23.66696548461914],
+        "confidence": 0.32377333401044694,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 28,
+      "image": "input.mp4:frame_000028",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1530.830322265625, 379.2450256347656, 1640.6875, 545.3472900390625
+        ],
+        "player_foot_xy": [1585.7589111328125, 545.3472900390625],
+        "player_foot_court_xy": [11.87874984741211, 23.611148834228516],
+        "confidence": 0.5208517934429833,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 29,
+      "image": "input.mp4:frame_000029",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1526.580322265625, 380.738525390625, 1628.1690673828125,
+          544.8592529296875
+        ],
+        "player_foot_xy": [1577.3746948242188, 544.8592529296875],
+        "player_foot_court_xy": [12.372920989990234, 23.815338134765625],
+        "confidence": 0.33218575251902216,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 30,
+      "image": "input.mp4:frame_000030",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1518.9423828125, 384.95452880859375, 1621.861328125, 545.326904296875
+        ],
+        "player_foot_xy": [1570.40185546875, 545.326904296875],
+        "player_foot_court_xy": [11.875636100769043, 23.60305404663086],
+        "confidence": 0.06910472308344695,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 31,
+      "image": "input.mp4:frame_000031",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1510.03857421875, 388.9664611816406, 1623.9371337890625,
+          545.7470703125
+        ],
+        "player_foot_xy": [1566.9878540039062, 545.7470703125],
+        "player_foot_court_xy": [11.836748123168945, 23.563573837280273],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 32,
+      "image": "input.mp4:frame_000032",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1498.359130859375, 392.7016296386719, 1624.918701171875,
+          540.497802734375
+        ],
+        "player_foot_xy": [1561.638916015625, 540.497802734375],
+        "player_foot_court_xy": [12.13290786743164, 22.83895492553711],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 33,
+      "image": "input.mp4:frame_000033",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1486.41455078125, 393.989501953125, 1626.349853515625,
+          549.5194091796875
+        ],
+        "player_foot_xy": [1556.3822021484375, 549.5194091796875],
+        "player_foot_court_xy": [11.317713737487793, 23.15852928161621],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 34,
+      "image": "input.mp4:frame_000034",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1479.670654296875, 404.2314147949219, 1632.450927734375,
+          554.2824096679688
+        ],
+        "player_foot_xy": [1556.060791015625, 554.2824096679688],
+        "player_foot_court_xy": [11.142426490783691, 23.316347122192383],
+        "confidence": 0.07898213232864759,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 35,
+      "image": "input.mp4:frame_000035",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1470.516357421875, 409.3612060546875, 1631.2232666015625,
+          558.72705078125
+        ],
+        "player_foot_xy": [1550.8698120117188, 558.72705078125],
+        "player_foot_court_xy": [10.450982093811035, 22.692676544189453],
+        "confidence": 0.307222679965521,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 36,
+      "image": "input.mp4:frame_000036",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1466.7081298828125, 411.43328857421875, 1626.2900390625,
+          565.4918823242188
+        ],
+        "player_foot_xy": [1546.4990844726562, 565.4918823242188],
+        "player_foot_court_xy": [9.556062698364258, 23.05204200744629],
+        "confidence": 0.40444313005679633,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 37,
+      "image": "input.mp4:frame_000037",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1461.194091796875, 415.5135498046875, 1617.3775634765625,
+          568.4525756835938
+        ],
+        "player_foot_xy": [1539.2858276367188, 568.4525756835938],
+        "player_foot_court_xy": [9.187758445739746, 22.974950790405273],
+        "confidence": 0.5079769087235442,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 38,
+      "image": "input.mp4:frame_000038",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1460.1536865234375, 419.48590087890625, 1601.402099609375,
+          572.2249755859375
+        ],
+        "player_foot_xy": [1530.7778930664062, 572.2249755859375],
+        "player_foot_court_xy": [8.573742866516113, 22.346742630004883],
+        "confidence": 0.5383535357752258,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 39,
+      "image": "input.mp4:frame_000039",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1458.1241455078125, 421.4806823730469, 1583.104736328125,
+          582.8944091796875
+        ],
+        "player_foot_xy": [1520.6144409179688, 582.8944091796875],
+        "player_foot_court_xy": [7.796932697296143, 22.6542911529541],
+        "confidence": 0.5757555924136232,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 40,
+      "image": "input.mp4:frame_000040",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1456.41455078125, 422.33953857421875, 1568.652587890625,
+          586.7220458984375
+        ],
+        "player_foot_xy": [1512.5335693359375, 586.7220458984375],
+        "player_foot_court_xy": [7.253588676452637, 22.16083526611328],
+        "confidence": 0.5435833218445254,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 41,
+      "image": "input.mp4:frame_000041",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1458.89453125, 421.7778625488281, 1558.4697265625, 590.5343017578125
+        ],
+        "player_foot_xy": [1508.68212890625, 590.5343017578125],
+        "player_foot_court_xy": [6.506895065307617, 21.679729461669922],
+        "confidence": 0.4574887361108937,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 42,
+      "image": "input.mp4:frame_000042",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1459.490478515625, 421.2279052734375, 1555.5406494140625,
+          593.7962646484375
+        ],
+        "player_foot_xy": [1507.5155639648438, 593.7962646484375],
+        "player_foot_court_xy": [6.425625801086426, 21.971237182617188],
+        "confidence": 0.3378376114325917,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 43,
+      "image": "input.mp4:frame_000043",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1461.2889404296875, 419.3148193359375, 1556.490234375,
+          596.8089599609375
+        ],
+        "player_foot_xy": [1508.8895874023438, 596.8089599609375],
+        "player_foot_court_xy": [5.84114933013916, 21.565536499023438],
+        "confidence": 0.1854453699176123,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 44,
+      "image": "input.mp4:frame_000044",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1466.122314453125, 417.7090759277344, 1558.771484375, 598.2578125
+        ],
+        "player_foot_xy": [1512.4468994140625, 598.2578125],
+        "player_foot_court_xy": [6.033960342407227, 21.864580154418945],
+        "confidence": 0.08544536991761228,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 45,
+      "image": "input.mp4:frame_000045",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1470.14599609375, 417.17376708984375, 1563.142333984375,
+          597.71923828125
+        ],
+        "player_foot_xy": [1516.6441650390625, 597.71923828125],
+        "player_foot_court_xy": [6.007596015930176, 21.629819869995117],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 46,
+      "image": "input.mp4:frame_000046",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1472.2056884765625, 417.3252868652344, 1567.4501953125,
+          597.181396484375
+        ],
+        "player_foot_xy": [1519.8279418945312, 597.181396484375],
+        "player_foot_court_xy": [5.862620830535889, 21.56024169921875],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 47,
+      "image": "input.mp4:frame_000047",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1475.62060546875, 417.17303466796875, 1571.54443359375,
+          596.9767456054688
+        ],
+        "player_foot_xy": [1523.58251953125, 596.9767456054688],
+        "player_foot_court_xy": [6.073109149932861, 21.671117782592773],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 4
+      }
+    },
+    {
+      "frame_index": 48,
+      "image": "input.mp4:frame_000048",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1478.458251953125, 416.13226318359375, 1576.588134765625,
+          598.4117431640625
+        ],
+        "player_foot_xy": [1527.523193359375, 598.4117431640625],
+        "player_foot_court_xy": [5.996442794799805, 22.03129768371582],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 5
+      }
+    },
+    {
+      "frame_index": 49,
+      "image": "input.mp4:frame_000049",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1481.3096923828125, 414.910400390625, 1583.7755126953125,
+          598.6173706054688
+        ],
+        "player_foot_xy": [1532.5426025390625, 598.6173706054688],
+        "player_foot_court_xy": [5.933521747589111, 21.708660125732422],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 6
+      }
+    },
+    {
+      "frame_index": 50,
+      "image": "input.mp4:frame_000050",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1487.53369140625, 415.3481140136719, 1593.168212890625,
+          599.3930053710938
+        ],
+        "player_foot_xy": [1540.3509521484375, 599.3930053710938],
+        "player_foot_court_xy": [5.927936553955078, 22.335020065307617],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 7
+      }
+    },
+    {
+      "frame_index": 51,
+      "image": "input.mp4:frame_000051",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1501.83349609375, 414.4942932128906, 1599.968505859375,
+          599.5676879882812
+        ],
+        "player_foot_xy": [1550.9010009765625, 599.5676879882812],
+        "player_foot_court_xy": [5.950810432434082, 21.983766555786133],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 8
+      }
+    },
+    {
+      "frame_index": 52,
+      "image": "input.mp4:frame_000052",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 53,
+      "image": "input.mp4:frame_000053",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 54,
+      "image": "input.mp4:frame_000054",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 55,
+      "image": "input.mp4:frame_000055",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1544.7813720703125, 417.63427734375, 1632.5760498046875,
+          601.8575439453125
+        ],
+        "player_foot_xy": [1588.6787109375, 601.8575439453125],
+        "player_foot_court_xy": [6.0922651290893555, 23.12618064880371],
+        "confidence": 0.5236153956793235,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 56,
+      "image": "input.mp4:frame_000056",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1548.99365234375, 419.64520263671875, 1638.624267578125,
+          603.76220703125
+        ],
+        "player_foot_xy": [1593.8089599609375, 603.76220703125],
+        "player_foot_court_xy": [5.965183734893799, 23.148897171020508],
+        "confidence": 0.4226052317021667,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 57,
+      "image": "input.mp4:frame_000057",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1553.291259765625, 422.34429931640625, 1650.23193359375,
+          603.15673828125
+        ],
+        "player_foot_xy": [1601.7615966796875, 603.15673828125],
+        "player_foot_court_xy": [6.013286590576172, 23.16290283203125],
+        "confidence": 0.330076108089307,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 58,
+      "image": "input.mp4:frame_000058",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1560.017578125, 423.41986083984375, 1664.984619140625,
+          602.190673828125
+        ],
+        "player_foot_xy": [1612.5010986328125, 602.190673828125],
+        "player_foot_court_xy": [6.30104398727417, 23.654861450195312],
+        "confidence": 0.24813128261422612,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 59,
+      "image": "input.mp4:frame_000059",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1566.4039306640625, 423.3570556640625, 1677.2874755859375,
+          601.0213623046875
+        ],
+        "player_foot_xy": [1621.845703125, 601.0213623046875],
+        "player_foot_court_xy": [6.52618408203125, 24.159500122070312],
+        "confidence": 0.2096337760571474,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 60,
+      "image": "input.mp4:frame_000060",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1570.10888671875, 422.170166015625, 1685.927490234375,
+          602.9555053710938
+        ],
+        "player_foot_xy": [1628.0181884765625, 602.9555053710938],
+        "player_foot_court_xy": [6.405322074890137, 24.19042205810547],
+        "confidence": 0.22585130934651843,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 61,
+      "image": "input.mp4:frame_000061",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1570.53076171875, 421.505126953125, 1696.528564453125,
+          611.2527465820312
+        ],
+        "player_foot_xy": [1633.5296630859375, 611.2527465820312],
+        "player_foot_court_xy": [5.662872314453125, 24.65329360961914],
+        "confidence": 0.2919647469324749,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 62,
+      "image": "input.mp4:frame_000062",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1575.0406494140625, 423.239501953125, 1703.1375732421875,
+          620.20068359375
+        ],
+        "player_foot_xy": [1639.089111328125, 620.20068359375],
+        "player_foot_court_xy": [4.870561122894287, 24.92459487915039],
+        "confidence": 0.33341911057942897,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 63,
+      "image": "input.mp4:frame_000063",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1587.1124267578125, 427.5119934082031, 1709.1492919921875,
+          634.7889404296875
+        ],
+        "player_foot_xy": [1648.130859375, 634.7889404296875],
+        "player_foot_court_xy": [3.6176657676696777, 25.19568634033203],
+        "confidence": 0.36051302419613396,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 64,
+      "image": "input.mp4:frame_000064",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1598.524658203125, 432.351806640625, 1713.485595703125,
+          647.0078735351562
+        ],
+        "player_foot_xy": [1656.005126953125, 647.0078735351562],
+        "player_foot_court_xy": [2.6044304370880127, 25.539104461669922],
+        "confidence": 0.3742858594826529,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 65,
+      "image": "input.mp4:frame_000065",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1603.9390869140625, 438.48455810546875, 1720.7017822265625,
+          648.0995483398438
+        ],
+        "player_foot_xy": [1662.3204345703125, 648.0995483398438],
+        "player_foot_court_xy": [2.566765785217285, 25.721435546875],
+        "confidence": 0.35185793312390723,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 66,
+      "image": "input.mp4:frame_000066",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1604.86669921875, 442.91033935546875, 1722.063720703125,
+          648.0084228515625
+        ],
+        "player_foot_xy": [1663.4652099609375, 648.0084228515625],
+        "player_foot_court_xy": [2.6279406547546387, 25.709453582763672],
+        "confidence": 0.3506155039774276,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 67,
+      "image": "input.mp4:frame_000067",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1604.0687255859375, 446.0581970214844, 1719.7642822265625,
+          647.4080810546875
+        ],
+        "player_foot_xy": [1661.91650390625, 647.4080810546875],
+        "player_foot_court_xy": [2.546464443206787, 25.93747329711914],
+        "confidence": 0.3880531996783453,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 68,
+      "image": "input.mp4:frame_000068",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1600.7369384765625, 445.819580078125, 1717.97314453125,
+          647.5333862304688
+        ],
+        "player_foot_xy": [1659.3550415039062, 647.5333862304688],
+        "player_foot_court_xy": [2.5303092002868652, 25.87582778930664],
+        "confidence": 0.46903174738881137,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 69,
+      "image": "input.mp4:frame_000069",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1603.8489990234375, 442.365234375, 1716.7591552734375,
+          647.8621215820312
+        ],
+        "player_foot_xy": [1660.3040771484375, 647.8621215820312],
+        "player_foot_court_xy": [2.4607975482940674, 25.94476318359375],
+        "confidence": 0.5196232016224156,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 70,
+      "image": "input.mp4:frame_000070",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1611.35009765625, 434.4156188964844, 1715.37451171875,
+          648.343017578125
+        ],
+        "player_foot_xy": [1663.3623046875, 648.343017578125],
+        "player_foot_court_xy": [2.477252721786499, 26.130294799804688],
+        "confidence": 0.5450379183461156,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 71,
+      "image": "input.mp4:frame_000071",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1616.3756103515625, 424.3154296875, 1714.6900634765625,
+          648.2237548828125
+        ],
+        "player_foot_xy": [1665.5328369140625, 648.2237548828125],
+        "player_foot_court_xy": [2.509060859680176, 26.188404083251953],
+        "confidence": 0.5379257824262451,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 72,
+      "image": "input.mp4:frame_000072",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1619.2921142578125, 400.0989074707031, 1711.0220947265625,
+          647.6558837890625
+        ],
+        "player_foot_xy": [1665.1571044921875, 647.6558837890625],
+        "player_foot_court_xy": [2.667570114135742, 26.14868927001953],
+        "confidence": 0.8207869235329873,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 73,
+      "image": "input.mp4:frame_000073",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1626.6917724609375, 386.0834655761719, 1706.5755615234375,
+          645.915283203125
+        ],
+        "player_foot_xy": [1666.6336669921875, 645.915283203125],
+        "player_foot_court_xy": [2.8386714458465576, 26.160762786865234],
+        "confidence": 0.7207869235329873,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 74,
+      "image": "input.mp4:frame_000074",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1630.057373046875, 372.4029235839844, 1704.924560546875,
+          638.3123779296875
+        ],
+        "player_foot_xy": [1667.490966796875, 638.3123779296875],
+        "player_foot_court_xy": [3.551372528076172, 26.156726837158203],
+        "confidence": 0.6207869235329874,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 75,
+      "image": "input.mp4:frame_000075",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1623.4453125, 349.5142822265625, 1706.6407470703125, 635.1024169921875
+        ],
+        "player_foot_xy": [1665.0430297851562, 635.1024169921875],
+        "player_foot_court_xy": [3.8290982246398926, 26.249073028564453],
+        "confidence": 0.5207869235329874,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 76,
+      "image": "input.mp4:frame_000076",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          1629.3482666015625, 356.1375732421875, 1706.7462158203125,
+          626.8297119140625
+        ],
+        "player_foot_xy": [1668.0472412109375, 626.8297119140625],
+        "player_foot_court_xy": [4.8983612060546875, 26.399078369140625],
+        "confidence": 0.20516474680135666,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 77,
+      "image": "input.mp4:frame_000077",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1629.602783203125, 358.4287109375, 1708.59375, 620.8763427734375
+        ],
+        "player_foot_xy": [1669.0982666015625, 620.8763427734375],
+        "player_foot_court_xy": [6.003513336181641, 25.736038208007812],
+        "confidence": 0.10516474680135665,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 78,
+      "image": "input.mp4:frame_000078",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1633.9112548828125, 357.6485595703125, 1709.855712890625,
+          618.6785888671875
+        ],
+        "player_foot_xy": [1671.8834838867188, 618.6785888671875],
+        "player_foot_court_xy": [6.220430374145508, 25.805721282958984],
+        "confidence": 0.0051647468013566455,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 79,
+      "image": "input.mp4:frame_000079",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1634.759033203125, 357.10382080078125, 1713.2039794921875,
+          615.6427001953125
+        ],
+        "player_foot_xy": [1673.9815063476562, 615.6427001953125],
+        "player_foot_court_xy": [6.558165073394775, 26.00898551940918],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 80,
+      "image": "input.mp4:frame_000080",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1634.9945068359375, 353.39874267578125, 1716.8851318359375,
+          616.044921875
+        ],
+        "player_foot_xy": [1675.9398193359375, 616.044921875],
+        "player_foot_court_xy": [6.045990943908691, 24.913959503173828],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 4
+      }
+    },
+    {
+      "frame_index": 81,
+      "image": "input.mp4:frame_000081",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1639.2509765625, 364.80511474609375, 1721.734130859375, 614.9189453125
+        ],
+        "player_foot_xy": [1680.4925537109375, 614.9189453125],
+        "player_foot_court_xy": [6.184040069580078, 25.280731201171875],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 5
+      }
+    },
+    {
+      "frame_index": 82,
+      "image": "input.mp4:frame_000082",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1640.2421875, 364.0279541015625, 1723.572021484375, 623.175048828125
+        ],
+        "player_foot_xy": [1681.9071044921875, 623.175048828125],
+        "player_foot_court_xy": [5.6848063468933105, 25.53789520263672],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 6
+      }
+    },
+    {
+      "frame_index": 83,
+      "image": "input.mp4:frame_000083",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          1650.81884765625, 370.94189453125, 1725.700927734375,
+          624.2611694335938
+        ],
+        "player_foot_xy": [1688.2598876953125, 624.2611694335938],
+        "player_foot_court_xy": [5.632312774658203, 26.213388442993164],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 7
+      }
+    },
+    {
+      "frame_index": 84,
+      "image": "input.mp4:frame_000084",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          1659.2471923828125, 382.4299621582031, 1729.5443115234375,
+          622.3426513671875
+        ],
+        "player_foot_xy": [1694.395751953125, 622.3426513671875],
+        "player_foot_court_xy": [6.854750156402588, 27.08746910095215],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 8
+      }
+    },
+    {
+      "frame_index": 85,
+      "image": "input.mp4:frame_000085",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 86,
+      "image": "input.mp4:frame_000086",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 87,
+      "image": "input.mp4:frame_000087",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 88,
+      "image": "input.mp4:frame_000088",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 89,
+      "image": "input.mp4:frame_000089",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 90,
+      "image": "input.mp4:frame_000090",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 91,
+      "image": "input.mp4:frame_000091",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 92,
+      "image": "input.mp4:frame_000092",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 93,
+      "image": "input.mp4:frame_000093",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 94,
+      "image": "input.mp4:frame_000094",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 95,
+      "image": "input.mp4:frame_000095",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 96,
+      "image": "input.mp4:frame_000096",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 97,
+      "image": "input.mp4:frame_000097",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 98,
+      "image": "input.mp4:frame_000098",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 99,
+      "image": "input.mp4:frame_000099",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 100,
+      "image": "input.mp4:frame_000100",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 101,
+      "image": "input.mp4:frame_000101",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 102,
+      "image": "input.mp4:frame_000102",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 103,
+      "image": "input.mp4:frame_000103",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 104,
+      "image": "input.mp4:frame_000104",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 105,
+      "image": "input.mp4:frame_000105",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 106,
+      "image": "input.mp4:frame_000106",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 107,
+      "image": "input.mp4:frame_000107",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 108,
+      "image": "input.mp4:frame_000108",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 109,
+      "image": "input.mp4:frame_000109",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 110,
+      "image": "input.mp4:frame_000110",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 111,
+      "image": "input.mp4:frame_000111",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 112,
+      "image": "input.mp4:frame_000112",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 113,
+      "image": "input.mp4:frame_000113",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 114,
+      "image": "input.mp4:frame_000114",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 115,
+      "image": "input.mp4:frame_000115",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 116,
+      "image": "input.mp4:frame_000116",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 117,
+      "image": "input.mp4:frame_000117",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 118,
+      "image": "input.mp4:frame_000118",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 119,
+      "image": "input.mp4:frame_000119",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 120,
+      "image": "input.mp4:frame_000120",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 121,
+      "image": "input.mp4:frame_000121",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 122,
+      "image": "input.mp4:frame_000122",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 123,
+      "image": "input.mp4:frame_000123",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 124,
+      "image": "input.mp4:frame_000124",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 125,
+      "image": "input.mp4:frame_000125",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 126,
+      "image": "input.mp4:frame_000126",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 127,
+      "image": "input.mp4:frame_000127",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 128,
+      "image": "input.mp4:frame_000128",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 129,
+      "image": "input.mp4:frame_000129",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 130,
+      "image": "input.mp4:frame_000130",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 131,
+      "image": "input.mp4:frame_000131",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 132,
+      "image": "input.mp4:frame_000132",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 133,
+      "image": "input.mp4:frame_000133",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 134,
+      "image": "input.mp4:frame_000134",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          742.149658203125, 463.4092712402344, 840.8934326171875,
+          693.3147583007812
+        ],
+        "player_foot_xy": [791.5215454101562, 693.3147583007812],
+        "player_foot_court_xy": [-6.219449520111084, 2.390618085861206],
+        "confidence": 0.11100791905110952,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 135,
+      "image": "input.mp4:frame_000135",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          742.3027954101562, 463.1748962402344, 842.7008056640625,
+          692.87060546875
+        ],
+        "player_foot_xy": [792.5018005371094, 692.87060546875],
+        "player_foot_court_xy": [-6.103051662445068, 2.687472343444824],
+        "confidence": 0.1434742100081553,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 136,
+      "image": "input.mp4:frame_000136",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          742.3104858398438, 465.1555480957031, 847.6177368164062,
+          692.5123291015625
+        ],
+        "player_foot_xy": [794.964111328125, 692.5123291015625],
+        "player_foot_court_xy": [-6.030186653137207, 2.685009479522705],
+        "confidence": 0.1724981621211269,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 137,
+      "image": "input.mp4:frame_000137",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          880.4560546875, 425.92840576171875, 972.8204956054688, 645.06591796875
+        ],
+        "player_foot_xy": [926.6382751464844, 645.06591796875],
+        "player_foot_court_xy": [-0.5304742455482483, 4.8096394538879395],
+        "confidence": 0.3012861978944862,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 138,
+      "image": "input.mp4:frame_000138",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          873.83935546875, 423.298828125, 971.9058837890625, 639.811279296875
+        ],
+        "player_foot_xy": [922.8726196289062, 639.811279296875],
+        "player_foot_court_xy": [-0.3085102438926697, 4.275732040405273],
+        "confidence": 0.44777302103692773,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 139,
+      "image": "input.mp4:frame_000139",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          873.3960571289062, 421.1754455566406, 967.1779174804688,
+          637.1688232421875
+        ],
+        "player_foot_xy": [920.2869873046875, 637.1688232421875],
+        "player_foot_court_xy": [0.1529044210910797, 4.427179336547852],
+        "confidence": 0.5335037960337377,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 140,
+      "image": "input.mp4:frame_000140",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          871.4842529296875, 420.554443359375, 962.302001953125,
+          634.4719848632812
+        ],
+        "player_foot_xy": [916.8931274414062, 634.4719848632812],
+        "player_foot_court_xy": [0.3699619770050049, 4.2551045417785645],
+        "confidence": 0.5644757113954242,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 141,
+      "image": "input.mp4:frame_000141",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          866.2402954101562, 422.22161865234375, 959.2380981445312,
+          633.8508911132812
+        ],
+        "player_foot_xy": [912.7391967773438, 633.8508911132812],
+        "player_foot_court_xy": [0.3861757516860962, 4.122907638549805],
+        "confidence": 0.5928196866126691,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 142,
+      "image": "input.mp4:frame_000142",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          861.7999877929688, 424.4781188964844, 960.3997192382812,
+          634.630126953125
+        ],
+        "player_foot_xy": [911.099853515625, 634.630126953125],
+        "player_foot_court_xy": [0.2969517409801483, 4.101029396057129],
+        "confidence": 0.5790339416417716,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 143,
+      "image": "input.mp4:frame_000143",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          860.885986328125, 425.3763427734375, 960.852294921875,
+          634.0257568359375
+        ],
+        "player_foot_xy": [910.869140625, 634.0257568359375],
+        "player_foot_court_xy": [0.08356502652168274, 3.7768073081970215],
+        "confidence": 0.5348115974786113,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 144,
+      "image": "input.mp4:frame_000144",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          860.87890625, 427.05230712890625, 960.196533203125, 633.6080322265625
+        ],
+        "player_foot_xy": [910.5377197265625, 633.6080322265625],
+        "player_foot_court_xy": [0.05320155248045921, 3.8326306343078613],
+        "confidence": 0.47881447132720767,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 145,
+      "image": "input.mp4:frame_000145",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          862.98486328125, 426.63751220703125, 960.3804931640625,
+          633.2564697265625
+        ],
+        "player_foot_xy": [911.6826782226562, 633.2564697265625],
+        "player_foot_court_xy": [0.3636627495288849, 4.155420780181885],
+        "confidence": 0.3788144713272077,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 146,
+      "image": "input.mp4:frame_000146",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          865.5115356445312, 425.4031982421875, 956.838134765625,
+          632.0654907226562
+        ],
+        "player_foot_xy": [911.1748352050781, 632.0654907226562],
+        "player_foot_court_xy": [0.5128645300865173, 4.156314849853516],
+        "confidence": 0.2788144713272077,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 147,
+      "image": "input.mp4:frame_000147",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          869.214111328125, 422.6990661621094, 953.0628662109375,
+          629.0374755859375
+        ],
+        "player_foot_xy": [911.1384887695312, 629.0374755859375],
+        "player_foot_court_xy": [0.6888983249664307, 3.7400710582733154],
+        "confidence": 0.1788144713272077,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 148,
+      "image": "input.mp4:frame_000148",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          867.7445068359375, 420.359619140625, 940.667724609375,
+          622.449462890625
+        ],
+        "player_foot_xy": [904.2061157226562, 622.449462890625],
+        "player_foot_court_xy": [1.3462022542953491, 3.437389612197876],
+        "confidence": 0.0788144713272077,
+        "source": "smoothed",
+        "frames_since_observed": 4
+      }
+    },
+    {
+      "frame_index": 149,
+      "image": "input.mp4:frame_000149",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          781.9068603515625, 468.9070129394531, 880.22314453125,
+          694.614501953125
+        ],
+        "player_foot_xy": [831.0650024414062, 694.614501953125],
+        "player_foot_court_xy": [-6.089385986328125, 3.7052907943725586],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 5
+      }
+    },
+    {
+      "frame_index": 150,
+      "image": "input.mp4:frame_000150",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          793.8177490234375, 463.16265869140625, 885.9661865234375,
+          695.0387573242188
+        ],
+        "player_foot_xy": [839.8919677734375, 695.0387573242188],
+        "player_foot_court_xy": [-6.092782020568848, 3.845242738723755],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 6
+      }
+    },
+    {
+      "frame_index": 151,
+      "image": "input.mp4:frame_000151",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          804.4791259765625, 459.35052490234375, 895.5584716796875,
+          690.7874755859375
+        ],
+        "player_foot_xy": [850.018798828125, 690.7874755859375],
+        "player_foot_court_xy": [-5.345349311828613, 4.064212799072266],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 7
+      }
+    },
+    {
+      "frame_index": 152,
+      "image": "input.mp4:frame_000152",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          808.7607421875, 460.92205810546875, 903.0509033203125,
+          688.210693359375
+        ],
+        "player_foot_xy": [855.9058227539062, 688.210693359375],
+        "player_foot_court_xy": [-5.066089153289795, 4.146395206451416],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 8
+      }
+    },
+    {
+      "frame_index": 153,
+      "image": "input.mp4:frame_000153",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 154,
+      "image": "input.mp4:frame_000154",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 155,
+      "image": "input.mp4:frame_000155",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 156,
+      "image": "input.mp4:frame_000156",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 157,
+      "image": "input.mp4:frame_000157",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 158,
+      "image": "input.mp4:frame_000158",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 159,
+      "image": "input.mp4:frame_000159",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 160,
+      "image": "input.mp4:frame_000160",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 161,
+      "image": "input.mp4:frame_000161",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 162,
+      "image": "input.mp4:frame_000162",
+      "possession": {
+        "reason": "ok",
+        "player_bbox_xyxy": [
+          869.1033935546875, 494.29486083984375, 984.7652587890625,
+          704.631591796875
+        ],
+        "player_foot_xy": [926.934326171875, 704.631591796875],
+        "player_foot_court_xy": [-5.824814796447754, 6.258153438568115],
+        "confidence": 0.3075795645479582,
+        "source": "observed",
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 163,
+      "image": "input.mp4:frame_000163",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          873.6575317382812, 495.4906005859375, 992.4050903320312,
+          705.4111938476562
+        ],
+        "player_foot_xy": [933.0313110351562, 705.4111938476562],
+        "player_foot_court_xy": [-5.8289875984191895, 6.438421249389648],
+        "confidence": 0.2075795645479582,
+        "source": "smoothed",
+        "frames_since_observed": 1
+      }
+    },
+    {
+      "frame_index": 164,
+      "image": "input.mp4:frame_000164",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          888.7822265625, 495.49444580078125, 1005.9724731445312,
+          706.18896484375
+        ],
+        "player_foot_xy": [947.3773498535156, 706.18896484375],
+        "player_foot_court_xy": [-5.753378868103027, 6.834533214569092],
+        "confidence": 0.1075795645479582,
+        "source": "smoothed",
+        "frames_since_observed": 2
+      }
+    },
+    {
+      "frame_index": 165,
+      "image": "input.mp4:frame_000165",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          918.644287109375, 498.7605285644531, 1021.13330078125,
+          707.205810546875
+        ],
+        "player_foot_xy": [969.8887939453125, 707.205810546875],
+        "player_foot_court_xy": [-5.6183319091796875, 7.450474262237549],
+        "confidence": 0.00757956454795819,
+        "source": "smoothed",
+        "frames_since_observed": 3
+      }
+    },
+    {
+      "frame_index": 166,
+      "image": "input.mp4:frame_000166",
+      "possession": {
+        "reason": "ball_in_air",
+        "player_bbox_xyxy": [
+          922.1775512695312, 499.2322998046875, 1025.091552734375,
+          706.6285400390625
+        ],
+        "player_foot_xy": [973.6345520019531, 706.6285400390625],
+        "player_foot_court_xy": [-5.5353875160217285, 7.5338969230651855],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 4
+      }
+    },
+    {
+      "frame_index": 167,
+      "image": "input.mp4:frame_000167",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          934.6814575195312, 501.2617492675781, 1031.531494140625,
+          705.8402099609375
+        ],
+        "player_foot_xy": [983.1064758300781, 705.8402099609375],
+        "player_foot_court_xy": [-5.32488489151001, 8.012354850769043],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 5
+      }
+    },
+    {
+      "frame_index": 168,
+      "image": "input.mp4:frame_000168",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          943.9696655273438, 502.57269287109375, 1042.1817626953125,
+          705.9270629882812
+        ],
+        "player_foot_xy": [993.0757141113281, 705.9270629882812],
+        "player_foot_court_xy": [-5.29049015045166, 8.026046752929688],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 6
+      }
+    },
+    {
+      "frame_index": 169,
+      "image": "input.mp4:frame_000169",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          954.809326171875, 500.7457580566406, 1055.73095703125,
+          706.1002807617188
+        ],
+        "player_foot_xy": [1005.2701416015625, 706.1002807617188],
+        "player_foot_court_xy": [-5.216953754425049, 8.403844833374023],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 7
+      }
+    },
+    {
+      "frame_index": 170,
+      "image": "input.mp4:frame_000170",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": [
+          967.18017578125, 499.1869812011719, 1069.6260986328125,
+          704.7904052734375
+        ],
+        "player_foot_xy": [1018.4031372070312, 704.7904052734375],
+        "player_foot_court_xy": [-4.977203369140625, 8.723254203796387],
+        "confidence": 0,
+        "source": "smoothed",
+        "frames_since_observed": 8
+      }
+    },
+    {
+      "frame_index": 171,
+      "image": "input.mp4:frame_000171",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 172,
+      "image": "input.mp4:frame_000172",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 173,
+      "image": "input.mp4:frame_000173",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 174,
+      "image": "input.mp4:frame_000174",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 175,
+      "image": "input.mp4:frame_000175",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    },
+    {
+      "frame_index": 176,
+      "image": "input.mp4:frame_000176",
+      "possession": {
+        "reason": "no_ball",
+        "player_bbox_xyxy": null,
+        "player_foot_xy": null,
+        "player_foot_court_xy": null,
+        "confidence": 0,
+        "source": null,
+        "frames_since_observed": 0
+      }
+    }
+  ]
+}
