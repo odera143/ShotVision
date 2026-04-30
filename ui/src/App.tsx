@@ -26,13 +26,6 @@ import VideoOverlayPlayer from './features/render/VideoOverlayPlayer';
 
 const API_BASE_URL = 'http://localhost:8080';
 
-const isPossessionOnlySummary = (
-  summary: InferenceSummary | null,
-): summary is PossessionOnlyInferenceSummary =>
-  summary !== null &&
-  'summary_type' in summary &&
-  summary.summary_type === 'POSSESSION_ONLY';
-
 function App() {
   const [file, setFile] = useState<File | null>(null);
   const [options, setOptions] = useState<RunInferenceOptions>({
@@ -57,9 +50,6 @@ function App() {
 
   const demoResults =
     testInferenceResults as unknown as PossessionOnlyInferenceSummary;
-  const playbackResults = isPossessionOnlySummary(results)
-    ? results
-    : demoResults;
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files?.[0] || null);
@@ -82,7 +72,7 @@ function App() {
 
   useEffect(() => {
     setSharedFrameIndex(0);
-  }, [playbackResults]);
+  }, [results]);
 
   const handleSubmit = async () => {
     if (!file) return;
@@ -427,7 +417,7 @@ function App() {
             <Card.Body>
               <VideoOverlayPlayer
                 videoUrl={selectedVideoUrl}
-                results={playbackResults}
+                results={results}
                 title='Input Video Overlay Surface'
                 sharedPlaybackEnabled={sharedPlaybackEnabled}
                 sharedFrameIndex={sharedFrameIndex}
@@ -443,7 +433,7 @@ function App() {
           <Card className='main-surface-card h-100 shadow-sm'>
             <Card.Body>
               <RenderTopDown
-                results={playbackResults}
+                results={results}
                 sharedPlaybackEnabled={sharedPlaybackEnabled}
                 sharedFrameIndex={sharedFrameIndex}
                 onSharedFrameIndexChange={setSharedFrameIndex}
@@ -462,7 +452,7 @@ function App() {
                   <div>
                     <h2 className='h4 mb-1'>Results</h2>
                     <p className='text-body-secondary mb-0'>
-                      View the inference summary JSON returned by the API.
+                      Inference Summary
                     </p>
                   </div>
                   <pre
