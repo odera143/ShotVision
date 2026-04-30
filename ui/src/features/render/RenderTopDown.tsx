@@ -80,6 +80,7 @@ const RenderTopDown = ({
       />
       <div className='d-flex gap-1'>
         <Button onClick={() => playThroughFrames()}>Play</Button>
+        <Button onClick={() => stopPlayback()}>Pause</Button>
         <Button
           onClick={() => {
             stopPlayback();
