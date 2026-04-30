@@ -153,6 +153,7 @@ const VideoOverlayPlayer = ({
     () => getOverlayFrame(results, overlayFrameIndex),
     [overlayFrameIndex, results],
   );
+
   const playerTooltipPosition = useMemo(() => {
     if (!overlayFrame?.playerBbox) {
       return null;
@@ -168,6 +169,16 @@ const VideoOverlayPlayer = ({
       isNearTop: y1 < videoSize.height * 0.12,
     };
   }, [overlayFrame, videoSize.height, videoSize.width]);
+
+  const playerFootPosition = useMemo(() => {
+    if (!results || results.frames.length === 0) {
+      return null;
+    }
+    const [x, y] = (results as PossessionOnlyInferenceSummary).frames[
+      overlayFrameIndex
+    ].possession.player_foot_court_xy ?? [0, 0];
+    return [x, y] as [number, number];
+  }, [overlayFrameIndex, results]);
 
   const stopAnimationLoop = () => {
     if (animationFrameRef.current !== null) {
@@ -379,6 +390,7 @@ const VideoOverlayPlayer = ({
               playerTooltipPosition && (
                 <PlayerStatsTooltip
                   playerTooltipPosition={playerTooltipPosition}
+                  playerFootPosition={playerFootPosition}
                 />
               )}
           </div>
