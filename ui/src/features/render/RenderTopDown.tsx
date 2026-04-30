@@ -143,7 +143,7 @@ const RenderTopDown = ({
   };
 
   return (
-    <Stack gap={3} className='align-items-center'>
+    <Stack gap={3} className='topdown-view align-items-center'>
       <div className='text-center'>
         <h2 className='h4 mb-1'>Top-Down Court</h2>
         <p className='text-body-secondary mb-0'>

@@ -204,8 +204,8 @@ function App() {
   );
 
   return (
-    <Container fluid='lg' className='py-4 py-md-5 text-start'>
-      <Stack gap={1} className='mb-4 mb-md-5'>
+    <Container fluid className='py-3 py-md-4 px-4 text-start'>
+      <Stack gap={1} className='mb-3'>
         <h1 className='mb-0'>Shot Vision</h1>
         <p className='text-body-secondary mb-0'>
           Upload a clip and adjust the inference settings before running the
@@ -213,174 +213,15 @@ function App() {
         </p>
       </Stack>
 
-      <Row className='g-4 align-items-start'>
-        <Col lg={5} xl={4}>
-          <Card className='h-100 shadow-sm'>
-            <Card.Body className='p-4'>
-              <Stack gap={4}>
-                <div>
-                  <h2 className='h4 mb-1'>Options</h2>
-                  <p className='text-body-secondary mb-0'>
-                    Configure the video inference run.
-                  </p>
-                </div>
+      <Alert show={!!error} variant='danger'>
+        {error}
+      </Alert>
 
-                <Form>
-                  <Form.Group className='mb-3'>
-                    <Form.Check
-                      type='checkbox'
-                      label={renderLabelWithTooltip(
-                        'Save overlays',
-                        'Returns an output video with detections, paint geometry, and court coordinates drawn on each frame.',
-                      )}
-                      checked={options.saveOverlays}
-                      onChange={(e) =>
-                        setOptions({
-                          ...options,
-                          saveOverlays: e.target.checked,
-                        })
-                      }
-                    />
-                  </Form.Group>
-
-                  <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>
-                      {renderLabelWithTooltip(
-                        'Basket Side',
-                        'Choose which side of the frame contains the visible hoop so the paint homography is oriented correctly.',
-                      )}
-                    </Form.Label>
-                    <Form.Select
-                      value={options.basketSide}
-                      onChange={(e) =>
-                        setOptions({
-                          ...options,
-                          basketSide: e.target.value as 'LEFT' | 'RIGHT',
-                        })
-                      }
-                    >
-                      <option value='LEFT'>Left</option>
-                      <option value='RIGHT'>Right</option>
-                    </Form.Select>
-                  </Form.Group>
-
-                  <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>
-                      {renderLabelWithTooltip(
-                        'Device',
-                        'Select GPU for faster inference when CUDA is available, or CPU if you want to run without the graphics card.',
-                      )}
-                    </Form.Label>
-                    <Form.Select
-                      value={options.device}
-                      onChange={(e) =>
-                        setOptions({
-                          ...options,
-                          device: e.target.value as 'CPU' | 'GPU',
-                        })
-                      }
-                    >
-                      <option value='CPU'>CPU</option>
-                      <option value='GPU'>GPU</option>
-                    </Form.Select>
-                  </Form.Group>
-
-                  <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>
-                      {renderLabelWithTooltip(
-                        'Frame Step',
-                        'Processes every Nth frame. Higher values run faster but skip more frames.',
-                      )}
-                    </Form.Label>
-                    <Form.Control
-                      type='number'
-                      min={1}
-                      value={options.frameStep}
-                      onChange={(e) =>
-                        setOptions({
-                          ...options,
-                          frameStep: parseInt(e.target.value) || 1,
-                        })
-                      }
-                    />
-                  </Form.Group>
-
-                  <Form.Group className='mb-3'>
-                    <Form.Label className='fw-semibold'>
-                      {renderLabelWithTooltip(
-                        'Results Mode',
-                        'Choose whether the API should return the full run summary or only the possession data needed for the court-view UI.',
-                      )}
-                    </Form.Label>
-                    <Form.Select
-                      value={options.resultsMode}
-                      onChange={(e) =>
-                        setOptions({
-                          ...options,
-                          resultsMode: e.target.value as
-                            | 'FULL'
-                            | 'POSSESSION_ONLY',
-                        })
-                      }
-                    >
-                      <option value='POSSESSION_ONLY'>Possession only</option>
-                      <option value='FULL'>Full summary</option>
-                    </Form.Select>
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label className='fw-semibold'>
-                      {renderLabelWithTooltip(
-                        'Hold Frames',
-                        'Keeps the current ball handler for this many uncertain frames before dropping possession.',
-                      )}
-                    </Form.Label>
-                    <Form.Control
-                      type='number'
-                      min={0}
-                      value={options.holdFrames}
-                      onChange={(e) =>
-                        setOptions({
-                          ...options,
-                          holdFrames: parseInt(e.target.value) || 0,
-                        })
-                      }
-                    />
-                  </Form.Group>
-
-                  <Form.Group className='mt-3'>
-                    <Form.Check
-                      type='checkbox'
-                      label={renderLabelWithTooltip(
-                        'Sync top-down court with video',
-                        'Links the court view to the same frame index and scrub position as the browser video overlay.',
-                      )}
-                      checked={sharedPlaybackEnabled}
-                      onChange={(e) =>
-                        setSharedPlaybackEnabled(e.target.checked)
-                      }
-                    />
-                  </Form.Group>
-                </Form>
-              </Stack>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={7} xl={8}>
-          <Alert show={!!error} variant='danger'>
-            {error}
-          </Alert>
-          <Card className='shadow-sm'>
-            <Card.Body className='p-4'>
-              <Stack gap={4}>
-                <div>
-                  <h2 className='h4 mb-1'>Upload Video</h2>
-                  <p className='text-body-secondary mb-0'>
-                    Select an MP4 file to run the current inference pipeline.
-                  </p>
-                </div>
-
+      <Card className='mb-3 mb-xl-4 shadow-sm'>
+        <Card.Body className='p-3 p-md-4'>
+          <Row className='g-3 g-xl-4 align-items-start'>
+            <Col lg={5}>
+              <Stack gap={3}>
                 <Form.Group>
                   <Form.Label className='fw-semibold'>Video File</Form.Label>
                   <Form.Control
@@ -413,10 +254,177 @@ function App() {
                   </Button>
                 </div>
               </Stack>
-            </Card.Body>
-          </Card>
-          <Card className='mt-4 shadow-sm'>
-            <Card.Body className='p-4'>
+            </Col>
+
+            <Col lg={7}>
+              <Form>
+                <Row className='g-3'>
+                  <Col md={6} xl={4}>
+                    <Form.Group>
+                      <Form.Label className='fw-semibold'>
+                        {renderLabelWithTooltip(
+                          'Save Debug Overlay',
+                          'Returns an output video from the pipeline with all detections overlaid.',
+                        )}
+                      </Form.Label>
+                      <Form.Select
+                        value={options.saveOverlays ? 'yes' : 'no'}
+                        onChange={(e) =>
+                          setOptions({
+                            ...options,
+                            saveOverlays: e.target.value === 'yes',
+                          })
+                        }
+                      >
+                        <option value='no'>No</option>
+                        <option value='yes'>Yes</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6} xl={4}>
+                    <Form.Group>
+                      <Form.Label className='fw-semibold'>
+                        {renderLabelWithTooltip(
+                          'Basket Side',
+                          'Choose which side of the frame contains the visible hoop so the paint homography is oriented correctly.',
+                        )}
+                      </Form.Label>
+                      <Form.Select
+                        value={options.basketSide}
+                        onChange={(e) =>
+                          setOptions({
+                            ...options,
+                            basketSide: e.target.value as 'LEFT' | 'RIGHT',
+                          })
+                        }
+                      >
+                        <option value='LEFT'>Left</option>
+                        <option value='RIGHT'>Right</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6} xl={4}>
+                    <Form.Group>
+                      <Form.Label className='fw-semibold'>
+                        {renderLabelWithTooltip(
+                          'Device',
+                          'Select GPU for faster inference when CUDA is available, or CPU if you want to run without the graphics card.',
+                        )}
+                      </Form.Label>
+                      <Form.Select
+                        value={options.device}
+                        onChange={(e) =>
+                          setOptions({
+                            ...options,
+                            device: e.target.value as 'CPU' | 'GPU',
+                          })
+                        }
+                      >
+                        <option value='CPU'>CPU</option>
+                        <option value='GPU'>GPU</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6} xl={4}>
+                    <Form.Group>
+                      <Form.Label className='fw-semibold'>
+                        {renderLabelWithTooltip(
+                          'Frame Step',
+                          'Processes every Nth frame. Higher values run faster but skip more frames.',
+                        )}
+                      </Form.Label>
+                      <Form.Control
+                        type='number'
+                        min={1}
+                        value={options.frameStep}
+                        onChange={(e) =>
+                          setOptions({
+                            ...options,
+                            frameStep: parseInt(e.target.value) || 1,
+                          })
+                        }
+                      />
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6} xl={4}>
+                    <Form.Group>
+                      <Form.Label className='fw-semibold'>
+                        {renderLabelWithTooltip(
+                          'Results Mode',
+                          'Choose whether the API should return the full run summary or only the possession data needed for the court-view UI.',
+                        )}
+                      </Form.Label>
+                      <Form.Select
+                        value={options.resultsMode}
+                        onChange={(e) =>
+                          setOptions({
+                            ...options,
+                            resultsMode: e.target.value as
+                              | 'FULL'
+                              | 'POSSESSION_ONLY',
+                          })
+                        }
+                      >
+                        <option value='POSSESSION_ONLY'>Possession only</option>
+                        <option disabled value='FULL'>
+                          Full summary - Disabled
+                        </option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6} xl={4}>
+                    <Form.Group>
+                      <Form.Label className='fw-semibold'>
+                        {renderLabelWithTooltip(
+                          'Hold Frames',
+                          'Keeps the current ball handler for this many uncertain frames before dropping possession.',
+                        )}
+                      </Form.Label>
+                      <Form.Control
+                        type='number'
+                        min={0}
+                        value={options.holdFrames}
+                        onChange={(e) =>
+                          setOptions({
+                            ...options,
+                            holdFrames: parseInt(e.target.value) || 0,
+                          })
+                        }
+                      />
+                    </Form.Group>
+                  </Col>
+
+                  <Col xs={12}>
+                    <Form.Group>
+                      <Form.Check
+                        type='checkbox'
+                        label={renderLabelWithTooltip(
+                          'Sync top-down court with video',
+                          'Links the court view to the same frame index and scrub position as the browser video overlay.',
+                        )}
+                        checked={sharedPlaybackEnabled}
+                        onChange={(e) =>
+                          setSharedPlaybackEnabled(e.target.checked)
+                        }
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+
+      <Row className='g-3 g-xl-4 align-items-stretch mb-3 mb-xl-4'>
+        <Col xl={8}>
+          <Card className='main-surface-card h-100 shadow-sm'>
+            <Card.Body>
               <VideoOverlayPlayer
                 videoUrl={selectedVideoUrl}
                 results={playbackResults}
@@ -429,9 +437,27 @@ function App() {
               />
             </Card.Body>
           </Card>
+        </Col>
+
+        <Col xl={4}>
+          <Card className='main-surface-card h-100 shadow-sm'>
+            <Card.Body>
+              <RenderTopDown
+                results={playbackResults}
+                sharedPlaybackEnabled={sharedPlaybackEnabled}
+                sharedFrameIndex={sharedFrameIndex}
+                onSharedFrameIndexChange={setSharedFrameIndex}
+              />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className='g-3 g-xl-4'>
+        <Col xl={8}>
           {results && (
-            <Card className='mt-4 shadow-sm'>
-              <Card.Body className='p-4'>
+            <Card className='mt-3 mt-xl-4 shadow-sm'>
+              <Card.Body className='p-3 p-md-4'>
                 <Stack gap={3}>
                   <div>
                     <h2 className='h4 mb-1'>Results</h2>
@@ -454,8 +480,8 @@ function App() {
             </Card>
           )}
           {overlayArtifactName && (
-            <Card className='mt-4 shadow-sm'>
-              <Card.Body className='p-4'>
+            <Card className='mt-3 mt-xl-4 shadow-sm'>
+              <Card.Body className='p-3 p-md-4'>
                 <Stack gap={3}>
                   <div>
                     <h2 className='h4 mb-1'>Overlay Debug Artifact</h2>
@@ -470,14 +496,6 @@ function App() {
               </Card.Body>
             </Card>
           )}
-          <div className='mt-4'>
-            <RenderTopDown
-              results={playbackResults}
-              sharedPlaybackEnabled={sharedPlaybackEnabled}
-              sharedFrameIndex={sharedFrameIndex}
-              onSharedFrameIndexChange={setSharedFrameIndex}
-            />
-          </div>
         </Col>
       </Row>
     </Container>

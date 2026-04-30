@@ -116,7 +116,7 @@ const HalfCourt = ({ handlerXY }: HalfCourtProps) => {
 
   return (
     <div className='halfcourt-layout'>
-      <div className='halfcourt-surface border border-secondary'>
+      <div className='halfcourt-surface'>
         <svg ref={svgRef} width='100%' />
       </div>
     </div>
