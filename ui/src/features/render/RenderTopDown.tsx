@@ -1,17 +1,62 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { HalfCourt } from '../halfcourt';
-import type { PossessionOnlyInferenceSummary } from '../inference/types/InferenceSummary';
+import type {
+  FullInferenceSummary,
+  InferenceSummary,
+  PossessionOnlyInferenceSummary,
+} from '../inference/types/InferenceSummary';
 import Form from 'react-bootstrap/esm/Form';
-import { Button } from 'react-bootstrap';
+import { Alert, Button, Stack } from 'react-bootstrap';
+
+type RenderTopDownProps = {
+  results: InferenceSummary | null;
+  sharedPlaybackEnabled?: boolean;
+  sharedFrameIndex?: number;
+  onSharedFrameIndexChange?: (frameIndex: number) => void;
+};
+
+const isPossessionOnlySummary = (
+  results: InferenceSummary,
+): results is PossessionOnlyInferenceSummary =>
+  'summary_type' in results && results.summary_type === 'POSSESSION_ONLY';
+
+const getCourtPositionForFrame = (
+  results: InferenceSummary | null,
+  frameIndex: number,
+): [number, number] | null => {
+  if (!results || results.frames.length === 0) {
+    return null;
+  }
+
+  const clampedFrameIndex = Math.min(
+    results.frames.length - 1,
+    Math.max(0, Math.trunc(frameIndex)),
+  );
+
+  if (isPossessionOnlySummary(results)) {
+    return (results.frames[clampedFrameIndex].possession.player_foot_court_xy ??
+      null) as [number, number] | null;
+  }
+
+  return (
+    (results as FullInferenceSummary).frames[clampedFrameIndex].smoothed_possession
+      .player_foot_court_xy ?? null
+  ) as [number, number] | null;
+};
 
 const RenderTopDown = ({
   results,
-}: {
-  results: PossessionOnlyInferenceSummary;
-}) => {
-  const frames = results.frames;
+  sharedPlaybackEnabled = false,
+  sharedFrameIndex,
+  onSharedFrameIndexChange,
+}: RenderTopDownProps) => {
+  const frames = results?.frames ?? [];
   const maxFrameIndex = Math.max(0, frames.length - 1);
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
+
+  //might or might not use this, can be useful for smoothing out animations if too jittery.
+  const [frameStep, _] = useState(1);
+
   const playbackIntervalRef = useRef<number | null>(null);
 
   const clampFrameIndex = (value: number) => {
@@ -37,6 +82,12 @@ const RenderTopDown = ({
 
   useEffect(() => stopPlayback, []);
 
+  useEffect(() => {
+    if (sharedPlaybackEnabled) {
+      stopPlayback();
+    }
+  }, [sharedPlaybackEnabled]);
+
   const playThroughFrames = () => {
     if (frames.length === 0 || playbackIntervalRef.current !== null) {
       return;
@@ -49,7 +100,10 @@ const RenderTopDown = ({
     playbackIntervalRef.current = window.setInterval(() => {
       let shouldStop = false;
       setCurrentFrameIndex((previousFrameIndex) => {
-        const nextFrameIndex = Math.min(maxFrameIndex, previousFrameIndex + 1);
+        const nextFrameIndex = Math.min(
+          maxFrameIndex,
+          previousFrameIndex + frameStep,
+        );
         shouldStop = nextFrameIndex >= maxFrameIndex;
         return nextFrameIndex;
       });
@@ -57,34 +111,66 @@ const RenderTopDown = ({
       if (shouldStop) {
         stopPlayback();
       }
-    }, 33); //approx 30 fps
+    }, 33 * frameStep); //approx 30 fps
   };
+
+  const resolvedFrameIndex = sharedPlaybackEnabled
+    ? clampFrameIndex(sharedFrameIndex ?? 0)
+    : clampFrameIndex(currentFrameIndex);
 
   const currentFrame = useMemo(() => {
     if (frames.length === 0) {
       return null;
     }
 
-    return frames[clampFrameIndex(currentFrameIndex)];
-  }, [clampFrameIndex, currentFrameIndex, frames]);
+    return frames[resolvedFrameIndex];
+  }, [frames, resolvedFrameIndex]);
+
+  const currentCourtPosition = useMemo(
+    () => getCourtPositionForFrame(results, resolvedFrameIndex),
+    [resolvedFrameIndex, results],
+  );
+
+  const setFrameIndex = (nextFrameIndex: number) => {
+    const clamped = clampFrameIndex(nextFrameIndex);
+
+    if (sharedPlaybackEnabled) {
+      onSharedFrameIndexChange?.(clamped);
+      return;
+    }
+
+    setCurrentFrameIndex(clamped);
+  };
 
   return (
-    <div className='d-flex flex-column align-items-center gap-3'>
+    <Stack gap={3} className='align-items-center'>
+      <div className='text-center'>
+        <h2 className='h4 mb-1'>Top-Down Court</h2>
+        <p className='text-body-secondary mb-0'>
+          {sharedPlaybackEnabled
+            ? 'This view is following the same playback as the video overlay.'
+            : 'Use the controls below to step through possession positions.'}
+        </p>
+      </div>
       <HalfCourt
-        handlerXY={
-          currentFrame?.possession.player_foot_court_xy as
-            | [number, number]
-            | null
-            | undefined
-        }
+        handlerXY={currentCourtPosition}
       />
+      {!currentFrame && (
+        <Alert variant='secondary' className='mb-0'>
+          No court positions are available yet.
+        </Alert>
+      )}
       <div className='d-flex gap-1'>
-        <Button onClick={() => playThroughFrames()}>Play</Button>
-        <Button onClick={() => stopPlayback()}>Pause</Button>
+        {!sharedPlaybackEnabled && (
+          <>
+            <Button onClick={() => playThroughFrames()}>Play</Button>
+            <Button onClick={() => stopPlayback()}>Pause</Button>
+          </>
+        )}
         <Button
           onClick={() => {
             stopPlayback();
-            setCurrentFrameIndex((i) => Math.max(0, i - 1));
+            setFrameIndex(resolvedFrameIndex - frameStep);
           }}
         >
           Previous
@@ -92,24 +178,24 @@ const RenderTopDown = ({
         <Button
           onClick={() => {
             stopPlayback();
-            setCurrentFrameIndex((i) => Math.min(maxFrameIndex, i + 1));
+            setFrameIndex(resolvedFrameIndex + frameStep);
           }}
         >
           Next
         </Button>
         <Form.Control
           type='number'
-          value={currentFrameIndex}
+          value={resolvedFrameIndex}
           min={0}
           max={maxFrameIndex}
           onChange={(e) => {
             stopPlayback();
             const parsedValue = Number.parseInt(e.target.value, 10);
-            setCurrentFrameIndex(clampFrameIndex(parsedValue));
+            setFrameIndex(parsedValue);
           }}
         />
       </div>
-    </div>
+    </Stack>
   );
 };
 export default RenderTopDown;

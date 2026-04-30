@@ -22,8 +22,16 @@ import type {
 } from './features/inference/types/InferenceSummary';
 import testInferenceResults from './test-data/results.json';
 import RenderTopDown from './features/render/RenderTopDown';
+import VideoOverlayPlayer from './features/render/VideoOverlayPlayer';
 
 const API_BASE_URL = 'http://localhost:8080';
+
+const isPossessionOnlySummary = (
+  summary: InferenceSummary | null,
+): summary is PossessionOnlyInferenceSummary =>
+  summary !== null &&
+  'summary_type' in summary &&
+  summary.summary_type === 'POSSESSION_ONLY';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -42,10 +50,39 @@ function App() {
   const [overlayArtifactName, setOverlayArtifactName] = useState<string | null>(
     null,
   );
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState<string | null>(null);
+  const [sharedPlaybackEnabled, setSharedPlaybackEnabled] = useState(true);
+  const [sharedFrameIndex, setSharedFrameIndex] = useState(0);
+  const [sharedOverlayFps, setSharedOverlayFps] = useState(30);
+
+  const demoResults =
+    testInferenceResults as unknown as PossessionOnlyInferenceSummary;
+  const playbackResults = isPossessionOnlySummary(results)
+    ? results
+    : demoResults;
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files?.[0] || null);
   };
+
+  useEffect(() => {
+    if (!file) {
+      setSelectedVideoUrl(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    setSelectedVideoUrl(objectUrl);
+    setSharedFrameIndex(0);
+
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [file]);
+
+  useEffect(() => {
+    setSharedFrameIndex(0);
+  }, [playbackResults]);
 
   const handleSubmit = async () => {
     if (!file) return;
@@ -310,6 +347,20 @@ function App() {
                       }
                     />
                   </Form.Group>
+
+                  <Form.Group className='mt-3'>
+                    <Form.Check
+                      type='checkbox'
+                      label={renderLabelWithTooltip(
+                        'Sync top-down court with video',
+                        'Links the court view to the same frame index and scrub position as the browser video overlay.',
+                      )}
+                      checked={sharedPlaybackEnabled}
+                      onChange={(e) =>
+                        setSharedPlaybackEnabled(e.target.checked)
+                      }
+                    />
+                  </Form.Group>
                 </Form>
               </Stack>
             </Card.Body>
@@ -364,6 +415,20 @@ function App() {
               </Stack>
             </Card.Body>
           </Card>
+          <Card className='mt-4 shadow-sm'>
+            <Card.Body className='p-4'>
+              <VideoOverlayPlayer
+                videoUrl={selectedVideoUrl}
+                results={playbackResults}
+                title='Input Video Overlay Surface'
+                sharedPlaybackEnabled={sharedPlaybackEnabled}
+                sharedFrameIndex={sharedFrameIndex}
+                onSharedFrameIndexChange={setSharedFrameIndex}
+                sharedFps={sharedOverlayFps}
+                onSharedFpsChange={setSharedOverlayFps}
+              />
+            </Card.Body>
+          </Card>
           {results && (
             <Card className='mt-4 shadow-sm'>
               <Card.Body className='p-4'>
@@ -407,9 +472,10 @@ function App() {
           )}
           <div className='mt-4'>
             <RenderTopDown
-              results={
-                testInferenceResults as unknown as PossessionOnlyInferenceSummary
-              }
+              results={playbackResults}
+              sharedPlaybackEnabled={sharedPlaybackEnabled}
+              sharedFrameIndex={sharedFrameIndex}
+              onSharedFrameIndexChange={setSharedFrameIndex}
             />
           </div>
         </Col>

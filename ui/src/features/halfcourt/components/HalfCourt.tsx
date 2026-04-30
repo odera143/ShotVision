@@ -30,8 +30,10 @@ const HalfCourt = ({ handlerXY }: HalfCourtProps) => {
 
     handlerMarkerRef.current = overlay
       .append('circle')
-      .attr('r', 1)
-      .attr('fill', 'red')
+      .attr('r', 1.7)
+      .attr('fill', 'none')
+      .attr('stroke', 'green')
+      .attr('stroke-width', 0.7)
       .style('display', 'none')
       .node();
 
@@ -82,11 +84,13 @@ const HalfCourt = ({ handlerXY }: HalfCourtProps) => {
         return;
       }
 
-      const smoothing = 0.18;
+      const smoothing = 0.1;
       const nextX =
-        currentPosition[0] + (targetPosition[0] - currentPosition[0]) * smoothing;
+        currentPosition[0] +
+        (targetPosition[0] - currentPosition[0]) * smoothing;
       const nextY =
-        currentPosition[1] + (targetPosition[1] - currentPosition[1]) * smoothing;
+        currentPosition[1] +
+        (targetPosition[1] - currentPosition[1]) * smoothing;
       const remainingDistance = Math.hypot(
         targetPosition[0] - nextX,
         targetPosition[1] - nextY,
