@@ -38,6 +38,12 @@
   stroke-width: 4;
 }
 
+.video-overlay-hitbox {
+  fill: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+
 .video-overlay-foot {
   fill: rgba(17, 185, 129, 0.28);
   stroke: #11b981;
@@ -50,6 +56,29 @@
   stroke: white;
   fill: green;
   stroke-width: 1;
+}
+
+.video-overlay-tooltip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(18rem, calc(100% - 1rem));
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 0.8rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 0.5rem));
+}
+
+.video-overlay-tooltip-below {
+  transform: translate(-50%, 0.5rem);
 }
 
 .video-overlay-metadata {

@@ -5,6 +5,7 @@ import type {
   InferenceSummary,
   PossessionOnlyInferenceSummary,
 } from '../inference/types/InferenceSummary';
+import PlayerStatsTooltip from './PlayerStatsTooltip';
 
 type VideoOverlayPlayerProps = {
   videoUrl: string | null;
@@ -123,6 +124,7 @@ const VideoOverlayPlayer = ({
   const [localFps, setLocalFps] = useState(defaultFps);
   const [showBoundingBox, setShowBoundingBox] = useState(true);
   const [showFootMarker, setShowFootMarker] = useState(true);
+  const [isPlayerTooltipVisible, setIsPlayerTooltipVisible] = useState(false);
   const fps = sharedPlaybackEnabled
     ? Math.max(1, sharedFps ?? defaultFps)
     : localFps;
@@ -151,6 +153,21 @@ const VideoOverlayPlayer = ({
     () => getOverlayFrame(results, overlayFrameIndex),
     [overlayFrameIndex, results],
   );
+  const playerTooltipPosition = useMemo(() => {
+    if (!overlayFrame?.playerBbox) {
+      return null;
+    }
+
+    const [x1, y1, x2] = overlayFrame.playerBbox;
+    const left = ((x1 + x2) / 2 / videoSize.width) * 100;
+    const top = (y1 / videoSize.height) * 100;
+
+    return {
+      left: `${left}%`,
+      top: `${top}%`,
+      isNearTop: y1 < videoSize.height * 0.12,
+    };
+  }, [overlayFrame, videoSize.height, videoSize.width]);
 
   const stopAnimationLoop = () => {
     if (animationFrameRef.current !== null) {
@@ -164,6 +181,10 @@ const VideoOverlayPlayer = ({
   useEffect(() => {
     setCurrentTime(0);
   }, [videoUrl]);
+
+  useEffect(() => {
+    setIsPlayerTooltipVisible(false);
+  }, [overlayFrameIndex]);
 
   useEffect(() => {
     if (!sharedPlaybackEnabled || !videoRef.current) {
@@ -308,6 +329,27 @@ const VideoOverlayPlayer = ({
                   {'40%'}
                 </text>
               )}
+              {overlayFrame?.playerBbox && (
+                <rect
+                  x={overlayFrame.playerBbox[0]}
+                  y={overlayFrame.playerBbox[1]}
+                  width={Math.max(
+                    0,
+                    overlayFrame.playerBbox[2] - overlayFrame.playerBbox[0],
+                  )}
+                  height={Math.max(
+                    0,
+                    overlayFrame.playerBbox[3] - overlayFrame.playerBbox[1],
+                  )}
+                  className='video-overlay-hitbox'
+                  onMouseEnter={() => {
+                    setIsPlayerTooltipVisible(true);
+                  }}
+                  onMouseLeave={() => {
+                    setIsPlayerTooltipVisible(false);
+                  }}
+                />
+              )}
               {showBoundingBox && overlayFrame?.playerBbox && (
                 <rect
                   x={overlayFrame.playerBbox[0]}
@@ -332,6 +374,13 @@ const VideoOverlayPlayer = ({
                 />
               )}
             </svg>
+            {isPlayerTooltipVisible &&
+              overlayFrame &&
+              playerTooltipPosition && (
+                <PlayerStatsTooltip
+                  playerTooltipPosition={playerTooltipPosition}
+                />
+              )}
           </div>
 
           <Stack
@@ -373,14 +422,14 @@ const VideoOverlayPlayer = ({
                 <Form.Check
                   type='checkbox'
                   id='show-bounding-box'
-                  label='Show Bounding Box'
+                  label='Bounding Box'
                   checked={showBoundingBox}
                   onChange={() => setShowBoundingBox((value) => !value)}
                 />
                 <Form.Check
                   type='checkbox'
                   id='show-foot-marker'
-                  label='Show Foot Marker'
+                  label='Foot Marker'
                   checked={showFootMarker}
                   onChange={() => setShowFootMarker((value) => !value)}
                 />
