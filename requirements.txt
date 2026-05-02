@@ -4,3 +4,4 @@ ultralytics
 uvicorn
 fastapi
 python-multipart
+nba_api

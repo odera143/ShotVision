@@ -7,6 +7,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
+from nba_api.stats.static import players as static_players
+from nba_api.stats.endpoints import shotchartdetail
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -377,3 +379,71 @@ def get_overlay_video(job_id: str) -> FileResponse:
     if not overlay_path.exists():
         raise HTTPException(status_code=404, detail="Overlay video not found.")
     return FileResponse(path=overlay_path, media_type="video/mp4", filename=overlay_path.name)
+
+#nba_api endpoints
+
+ALL_PLAYERS = static_players.get_players()
+
+@app.get("/api/players")
+def search_players(q: str = Query(..., min_length=2)):
+    ql = q.lower()
+    matches = [p for p in ALL_PLAYERS if ql in p["full_name"].lower()]
+    return [{"id": p["id"], "name": p["full_name"]} for p in matches[:20]]
+
+@app.get("/api/shotgrid")
+def shotgrid(
+    player_id: int,
+    season: str,
+    season_type: str = "Regular Season",
+    grid: int = 1,
+    min_att: int = 3
+):
+    # Pull shot chart data
+    # Team_id=0 works for player shots; nba_api endpoint expects some fields
+    resp = shotchartdetail.ShotChartDetail(
+        team_id=0,
+        player_id=player_id,
+        season_nullable=season,
+        season_type_all_star=season_type,
+        context_measure_simple="FGA"
+    )
+    data = resp.get_data_frames()[0]
+    if data.empty:
+        result = {"playerId": player_id, "season": season, "seasonType": season_type, "gridFt": grid, "cells": []}
+        return result
+
+    # Columns vary; common ones: LOC_X, LOC_Y, SHOT_MADE_FLAG, SHOT_TYPE
+    df = data.copy()
+    df["made"] = df["SHOT_MADE_FLAG"].astype(int)
+
+    # Convert NBA Stats shot chart coords (NBA records in tenths of a foot)
+    df["x_ft"] = df["LOC_X"] / 10
+    df["y_ft"] = df["LOC_Y"] / 10
+
+    # Bin to grid in feet
+    df["gx"] = (df["x_ft"] / grid).round().astype(int) * grid
+    df["gy"] = (df["y_ft"] / grid).round().astype(int) * grid
+
+    # is3: use SHOT_TYPE contains '3PT'
+    df["is3"] = df["SHOT_TYPE"].astype(str).str.contains("3PT")
+
+    grouped = df.groupby(["gx", "gy", "is3"]).agg(att=("made", "size"), made=("made", "sum")).reset_index()
+    grouped = grouped[grouped["att"] >= min_att].copy()
+    grouped["fg"] = grouped["made"] / grouped["att"]
+    grouped["pts"] = grouped["fg"] * grouped["is3"].map(lambda v: 3 if v else 2)
+
+    cells = [
+        {
+            "x": int(row.gx),
+            "y": int(row.gy),
+            "att": int(row.att),
+            "made": int(row.made),
+            "fg": float(row.fg),
+            "pts": float(row.pts),
+            "is3": bool(row.is3),
+        }
+        for row in grouped.itertuples(index=False)
+    ]
+
+    result = {"playerId": player_id, "season": season, "seasonType": season_type, "gridFt": grid, "cells": cells}
+    return result
