@@ -23,6 +23,7 @@ import type {
 import testInferenceResults from './test-data/results.json';
 import RenderTopDown from './features/render/RenderTopDown';
 import VideoOverlayPlayer from './features/render/VideoOverlayPlayer';
+import PlayerForm from './features/PlayerForm';
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -412,7 +413,14 @@ function App() {
       </Card>
 
       <Row className='g-3 g-xl-4 align-items-stretch mb-3 mb-xl-4'>
-        <Col xl={8}>
+        <Col xl={2}>
+          <PlayerForm
+            onSubmit={(params) => {
+              console.log(params);
+            }}
+          />
+        </Col>
+        <Col xl={7}>
           <Card className='main-surface-card h-100 shadow-sm'>
             <Card.Body>
               <VideoOverlayPlayer
@@ -429,7 +437,7 @@ function App() {
           </Card>
         </Col>
 
-        <Col xl={4}>
+        <Col xl={3}>
           <Card className='main-surface-card h-100 shadow-sm'>
             <Card.Body>
               <RenderTopDown
@@ -442,7 +450,6 @@ function App() {
           </Card>
         </Col>
       </Row>
-
       <Row className='g-3 g-xl-4'>
         <Col xl={8}>
           {results && (
