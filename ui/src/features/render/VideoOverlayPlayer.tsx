@@ -20,6 +20,8 @@ type VideoOverlayPlayerProps = {
   sharedFps?: number;
   onSharedFpsChange?: (fps: number) => void;
   playerShotGrid: PlayerShotGrid | null;
+  playerShotRadiusFt: number;
+  playerShotMinAttempts: number;
 };
 
 type OverlayFrame = {
@@ -129,6 +131,8 @@ const VideoOverlayPlayer = ({
   sharedFps,
   onSharedFpsChange,
   playerShotGrid,
+  playerShotRadiusFt,
+  playerShotMinAttempts,
 }: VideoOverlayPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -188,8 +192,19 @@ const VideoOverlayPlayer = ({
   }, [overlayFrame]);
 
   const shotGridCell = useMemo(
-    () => findShotGridCell(playerFootPosition, playerShotGrid),
-    [playerFootPosition, playerShotGrid],
+    () =>
+      findShotGridCell(
+        playerFootPosition,
+        playerShotGrid,
+        playerShotRadiusFt,
+        playerShotMinAttempts,
+      ),
+    [
+      playerFootPosition,
+      playerShotGrid,
+      playerShotMinAttempts,
+      playerShotRadiusFt,
+    ],
   );
 
   const stopAnimationLoop = () => {
@@ -403,6 +418,8 @@ const VideoOverlayPlayer = ({
                   playerTooltipPosition={playerTooltipPosition}
                   playerFootPosition={playerFootPosition}
                   playerShotGrid={playerShotGrid}
+                  playerShotRadiusFt={playerShotRadiusFt}
+                  playerShotMinAttempts={playerShotMinAttempts}
                 />
               )}
           </div>

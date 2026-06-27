@@ -2,12 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Alert, Button, Card, Form, ListGroup, Stack } from 'react-bootstrap';
 
-type PlayerShotGridRequestParams = Record<string, string>;
+type PlayerShotGridSubmitValue = {
+  requestParams: Record<string, string>;
+  radiusFt: number;
+  minAttempts: number;
+};
 
 const PlayerForm = ({
   onSubmit,
 }: {
-  onSubmit: (params: PlayerShotGridRequestParams) => void;
+  onSubmit: (value: PlayerShotGridSubmitValue) => void;
 }) => {
   const API_BASE_URL = 'http://localhost:8080';
   const [playerQuery, setPlayerQuery] = useState('');
@@ -19,7 +23,7 @@ const PlayerForm = ({
   const [selectedSeasonType, setSelectedSeasonType] =
     useState<string>('Regular Season');
   const [minAtt, setMinAtt] = useState<number>(3);
-  const [gridFt, setGridFt] = useState<number>(1);
+  const [radiusFt, setRadiusFt] = useState<number>(5);
 
   const {
     data: playerData,
@@ -39,14 +43,18 @@ const PlayerForm = ({
   const buildRequestParams = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedPlayer) return;
-    const params = {
+    const requestParams = {
       player_id: selectedPlayer.id,
       season: selectedSeason,
       season_type: selectedSeasonType,
-      grid: gridFt.toString(),
-      min_att: minAtt.toString(),
+      grid: '1',
+      min_att: '1',
     };
-    onSubmit(params);
+    onSubmit({
+      requestParams,
+      radiusFt,
+      minAttempts: minAtt,
+    });
   };
 
   return (
@@ -137,21 +145,25 @@ const PlayerForm = ({
 
             <Form.Group controlId='min-attempts'>
               <Form.Label className='fw-semibold'>
-                Minimum Attempts Per Zone
+                Minimum Attempts
               </Form.Label>
               <Form.Control
                 type='number'
+                min={1}
                 value={minAtt}
-                onChange={(e) => setMinAtt(Number(e.target.value))}
+                onChange={(e) => setMinAtt(Math.max(1, Number(e.target.value)))}
               />
             </Form.Group>
 
-            <Form.Group controlId='zone-size'>
-              <Form.Label className='fw-semibold'>Zone Size (ft)</Form.Label>
+            <Form.Group controlId='shot-radius'>
+              <Form.Label className='fw-semibold'>Shot Radius (ft)</Form.Label>
               <Form.Control
                 type='number'
-                value={gridFt}
-                onChange={(e) => setGridFt(Number(e.target.value))}
+                min={1}
+                value={radiusFt}
+                onChange={(e) =>
+                  setRadiusFt(Math.max(1, Number(e.target.value)))
+                }
               />
             </Form.Group>
 

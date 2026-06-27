@@ -52,6 +52,8 @@ function App() {
   const [playerShotGrid, setPlayerShotGrid] = useState<PlayerShotGrid | null>(
     null,
   );
+  const [playerShotRadiusFt, setPlayerShotRadiusFt] = useState(5);
+  const [playerShotMinAttempts, setPlayerShotMinAttempts] = useState(3);
 
   const demoResults =
     testInferenceResults as unknown as PossessionOnlyInferenceSummary;
@@ -438,8 +440,10 @@ function App() {
       <Row className='g-3 g-xl-4 align-items-stretch mb-3 mb-xl-4'>
         <Col xl={2}>
           <PlayerForm
-            onSubmit={(params) => {
-              fetchPlayerShotGrid(params);
+            onSubmit={({ requestParams, radiusFt, minAttempts }) => {
+              setPlayerShotRadiusFt(radiusFt);
+              setPlayerShotMinAttempts(minAttempts);
+              fetchPlayerShotGrid(requestParams);
             }}
           />
         </Col>
@@ -456,6 +460,8 @@ function App() {
                 sharedFps={sharedOverlayFps}
                 onSharedFpsChange={setSharedOverlayFps}
                 playerShotGrid={playerShotGrid}
+                playerShotRadiusFt={playerShotRadiusFt}
+                playerShotMinAttempts={playerShotMinAttempts}
               />
             </Card.Body>
           </Card>

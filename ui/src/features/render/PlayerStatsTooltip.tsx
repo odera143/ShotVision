@@ -5,12 +5,21 @@ const PlayerStatsTooltip = ({
   playerTooltipPosition,
   playerFootPosition,
   playerShotGrid,
+  playerShotRadiusFt,
+  playerShotMinAttempts,
 }: {
   playerTooltipPosition: { left: string; top: string; isNearTop: boolean };
   playerFootPosition: [number, number] | null;
   playerShotGrid: PlayerShotGrid | null;
+  playerShotRadiusFt: number;
+  playerShotMinAttempts: number;
 }) => {
-  const shotGridCell = findShotGridCell(playerFootPosition, playerShotGrid);
+  const shotGridCell = findShotGridCell(
+    playerFootPosition,
+    playerShotGrid,
+    playerShotRadiusFt,
+    playerShotMinAttempts,
+  );
 
   return (
     <div
