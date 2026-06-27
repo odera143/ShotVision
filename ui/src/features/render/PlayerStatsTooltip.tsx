@@ -1,10 +1,17 @@
+import { findShotGridCell, formatShotGridPercent } from './shotGridStats';
+import type { PlayerShotGrid } from './types/PlayerShotGrid';
+
 const PlayerStatsTooltip = ({
   playerTooltipPosition,
   playerFootPosition,
+  playerShotGrid,
 }: {
   playerTooltipPosition: { left: string; top: string; isNearTop: boolean };
   playerFootPosition: [number, number] | null;
+  playerShotGrid: PlayerShotGrid | null;
 }) => {
+  const shotGridCell = findShotGridCell(playerFootPosition, playerShotGrid);
+
   return (
     <div
       className={`video-overlay-tooltip ${
@@ -40,7 +47,9 @@ const PlayerStatsTooltip = ({
         }}
       >
         <span>FG%:</span>
-        <span>40%</span>
+        <span>
+          {shotGridCell ? formatShotGridPercent(shotGridCell.fg) : '--'}
+        </span>
       </div>
       <div
         style={{
@@ -49,7 +58,11 @@ const PlayerStatsTooltip = ({
         }}
       >
         <span>Made/Att:</span>
-        <span>4/10</span>
+        <span>
+          {shotGridCell
+            ? `${shotGridCell.made}/${shotGridCell.att}`
+            : '--'}
+        </span>
       </div>
       <div
         style={{
@@ -58,7 +71,7 @@ const PlayerStatsTooltip = ({
         }}
       >
         <span>Expected pts:</span>
-        <span>6.8</span>
+        <span>{shotGridCell ? shotGridCell.pts.toFixed(2) : '--'}</span>
       </div>
     </div>
   );

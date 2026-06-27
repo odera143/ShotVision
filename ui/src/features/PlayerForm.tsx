@@ -2,7 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Alert, Button, Card, Form, ListGroup, Stack } from 'react-bootstrap';
 
-const PlayerForm = ({ onSubmit }: { onSubmit: (params: any) => void }) => {
+type PlayerShotGridRequestParams = Record<string, string>;
+
+const PlayerForm = ({
+  onSubmit,
+}: {
+  onSubmit: (params: PlayerShotGridRequestParams) => void;
+}) => {
   const API_BASE_URL = 'http://localhost:8080';
   const [playerQuery, setPlayerQuery] = useState('');
   const [selectedPlayer, setSelectedPlayer] = useState<{
@@ -24,7 +30,7 @@ const PlayerForm = ({ onSubmit }: { onSubmit: (params: any) => void }) => {
     enabled: playerQuery.trim().length > 2 && !selectedPlayer,
     queryFn: () =>
       fetch(
-        `${API_BASE_URL}/api/players?q=${encodeURIComponent(playerQuery)}`,
+        `${API_BASE_URL}/players?q=${encodeURIComponent(playerQuery)}`,
       ).then((res) => res.json()),
   });
   const showPlayerSuggestions =

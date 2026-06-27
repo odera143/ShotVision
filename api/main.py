@@ -384,13 +384,13 @@ def get_overlay_video(job_id: str) -> FileResponse:
 
 ALL_PLAYERS = static_players.get_players()
 
-@app.get("/api/players")
+@app.get("/players")
 def search_players(q: str = Query(..., min_length=2)):
     ql = q.lower()
     matches = [p for p in ALL_PLAYERS if ql in p["full_name"].lower()]
     return [{"id": p["id"], "name": p["full_name"]} for p in matches[:20]]
 
-@app.get("/api/shotgrid")
+@app.get("/shotgrid")
 def shotgrid(
     player_id: int,
     season: str,

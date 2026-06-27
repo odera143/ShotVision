@@ -6,6 +6,8 @@ import type {
   PossessionOnlyInferenceSummary,
 } from '../inference/types/InferenceSummary';
 import PlayerStatsTooltip from './PlayerStatsTooltip';
+import { findShotGridCell, formatShotGridPercent } from './shotGridStats';
+import type { PlayerShotGrid } from './types/PlayerShotGrid';
 
 type VideoOverlayPlayerProps = {
   videoUrl: string | null;
@@ -17,6 +19,7 @@ type VideoOverlayPlayerProps = {
   onSharedFrameIndexChange?: (frameIndex: number) => void;
   sharedFps?: number;
   onSharedFpsChange?: (fps: number) => void;
+  playerShotGrid: PlayerShotGrid | null;
 };
 
 type OverlayFrame = {
@@ -26,6 +29,7 @@ type OverlayFrame = {
   source: string | null;
   playerBbox: [number, number, number, number] | null;
   playerFoot: [number, number] | null;
+  playerFootCourt: [number, number] | null;
 };
 
 const DEFAULT_FPS = 30;
@@ -61,6 +65,9 @@ const getPossessionOnlyOverlayFrame = (
     playerFoot: isPoint(frame.possession.player_foot_xy)
       ? frame.possession.player_foot_xy
       : null,
+    playerFootCourt: isPoint(frame.possession.player_foot_court_xy)
+      ? frame.possession.player_foot_court_xy
+      : null,
   };
 };
 
@@ -83,6 +90,11 @@ const getFullOverlayFrame = (
     playerFoot: isPoint(frame.smoothed_possession.player_foot_xy)
       ? frame.smoothed_possession.player_foot_xy
       : null,
+    playerFootCourt: isPoint(frame.smoothed_possession.player_foot_court_xy)
+      ? frame.smoothed_possession.player_foot_court_xy
+      : isPoint(frame.paint_homography.player_foot_court_xy)
+        ? frame.paint_homography.player_foot_court_xy
+        : null,
   };
 };
 
@@ -116,6 +128,7 @@ const VideoOverlayPlayer = ({
   onSharedFrameIndexChange,
   sharedFps,
   onSharedFpsChange,
+  playerShotGrid,
 }: VideoOverlayPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -171,14 +184,13 @@ const VideoOverlayPlayer = ({
   }, [overlayFrame, videoSize.height, videoSize.width]);
 
   const playerFootPosition = useMemo(() => {
-    if (!results || results.frames.length === 0) {
-      return null;
-    }
-    const [x, y] = (results as PossessionOnlyInferenceSummary).frames[
-      overlayFrameIndex
-    ].possession.player_foot_court_xy ?? [0, 0];
-    return [x, y] as [number, number];
-  }, [overlayFrameIndex, results]);
+    return overlayFrame?.playerFootCourt ?? null;
+  }, [overlayFrame]);
+
+  const shotGridCell = useMemo(
+    () => findShotGridCell(playerFootPosition, playerShotGrid),
+    [playerFootPosition, playerShotGrid],
+  );
 
   const stopAnimationLoop = () => {
     if (animationFrameRef.current !== null) {
@@ -330,14 +342,13 @@ const VideoOverlayPlayer = ({
               viewBox={`0 0 ${videoSize.width} ${videoSize.height}`}
               aria-hidden='true'
             >
-              {overlayFrame?.playerBbox && (
+              {overlayFrame?.playerBbox && shotGridCell && (
                 <text
                   x={overlayFrame.playerBbox[0]}
                   y={overlayFrame.playerBbox[1] - 5}
                   className='video-overlay-label'
                 >
-                  {/*hardcoded stat for now, need to see how it looks in ui*/}
-                  {'40%'}
+                  {formatShotGridPercent(shotGridCell.fg)}
                 </text>
               )}
               {overlayFrame?.playerBbox && (
@@ -391,6 +402,7 @@ const VideoOverlayPlayer = ({
                 <PlayerStatsTooltip
                   playerTooltipPosition={playerTooltipPosition}
                   playerFootPosition={playerFootPosition}
+                  playerShotGrid={playerShotGrid}
                 />
               )}
           </div>
@@ -464,6 +476,16 @@ const VideoOverlayPlayer = ({
             {overlayFrame?.reason && (
               <span>
                 Ball <strong>{overlayFrame.reason}</strong>
+              </span>
+            )}
+            {overlayFrame?.playerFootCourt && (
+              <span>
+                Foot{' '}
+                <strong>
+                  {`(${overlayFrame.playerFootCourt[0].toFixed(
+                    1,
+                  )}, ${overlayFrame.playerFootCourt[1].toFixed(1)})`}
+                </strong>
               </span>
             )}
           </div>

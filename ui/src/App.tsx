@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import {
   Alert,
@@ -24,6 +24,7 @@ import testInferenceResults from './test-data/results.json';
 import RenderTopDown from './features/render/RenderTopDown';
 import VideoOverlayPlayer from './features/render/VideoOverlayPlayer';
 import PlayerForm from './features/PlayerForm';
+import type { PlayerShotGrid } from './features/render/types/PlayerShotGrid';
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -48,6 +49,9 @@ function App() {
   const [sharedPlaybackEnabled, setSharedPlaybackEnabled] = useState(true);
   const [sharedFrameIndex, setSharedFrameIndex] = useState(0);
   const [sharedOverlayFps, setSharedOverlayFps] = useState(30);
+  const [playerShotGrid, setPlayerShotGrid] = useState<PlayerShotGrid | null>(
+    null,
+  );
 
   const demoResults =
     testInferenceResults as unknown as PossessionOnlyInferenceSummary;
@@ -104,6 +108,60 @@ function App() {
     console.log(data);
   };
 
+  const fetchPlayerShotGrid = async (params: Record<string, string>) => {
+    setError(null);
+    const shotGrid = await fetch(
+      `${API_BASE_URL}/shotgrid?${new URLSearchParams(params).toString()}`,
+    );
+    if (!shotGrid.ok) {
+      setPlayerShotGrid(null);
+      setError('Failed to fetch player shot grid.');
+      return;
+    }
+
+    const shotGridJson: PlayerShotGrid = await shotGrid.json();
+    setPlayerShotGrid(shotGridJson);
+  };
+
+  const extractDownloadName = (headers: Headers) => {
+    const disposition = headers.get('content-disposition');
+    if (!disposition) return null;
+
+    const utf8Match = disposition.match(/filename\*=UTF-8''([^;]+)/i);
+    if (utf8Match?.[1]) {
+      return decodeURIComponent(utf8Match[1]);
+    }
+
+    const filenameMatch = disposition.match(/filename="?([^"]+)"?/i);
+    return filenameMatch?.[1] ?? null;
+  };
+
+  const fetchOverlayVideo = useCallback(
+    async (overlayPath: string) => {
+      const res = await fetch(`${API_BASE_URL}${overlayPath}`);
+
+      if (!res.ok) {
+        setError('Failed to fetch overlay video.');
+        return;
+      }
+
+      const blob = await res.blob();
+      const filename =
+        extractDownloadName(res.headers) ??
+        `${job?.job_id ?? 'shot-vision'}_overlay.mp4`;
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+      setOverlayArtifactName(filename);
+    },
+    [job?.job_id],
+  );
+
   useEffect(() => {
     if (!job?.job_id) return;
     if (jobStatus === 'completed' || jobStatus === 'failed') return;
@@ -131,42 +189,7 @@ function App() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [job, jobStatus]);
-  const extractDownloadName = (headers: Headers) => {
-    const disposition = headers.get('content-disposition');
-    if (!disposition) return null;
-
-    const utf8Match = disposition.match(/filename\*=UTF-8''([^;]+)/i);
-    if (utf8Match?.[1]) {
-      return decodeURIComponent(utf8Match[1]);
-    }
-
-    const filenameMatch = disposition.match(/filename="?([^"]+)"?/i);
-    return filenameMatch?.[1] ?? null;
-  };
-
-  const fetchOverlayVideo = async (overlayPath: string) => {
-    const res = await fetch(`${API_BASE_URL}${overlayPath}`);
-
-    if (!res.ok) {
-      setError('Failed to fetch overlay video.');
-      return;
-    }
-
-    const blob = await res.blob();
-    const filename =
-      extractDownloadName(res.headers) ??
-      `${job?.job_id ?? 'shot-vision'}_overlay.mp4`;
-    const objectUrl = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = objectUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-    setOverlayArtifactName(filename);
-  };
+  }, [fetchOverlayVideo, job, jobStatus]);
 
   const renderLabelWithTooltip = (label: string, tooltip: string) => (
     <span className='d-inline-flex align-items-center gap-2'>
@@ -416,7 +439,7 @@ function App() {
         <Col xl={2}>
           <PlayerForm
             onSubmit={(params) => {
-              console.log(params);
+              fetchPlayerShotGrid(params);
             }}
           />
         </Col>
@@ -425,13 +448,14 @@ function App() {
             <Card.Body>
               <VideoOverlayPlayer
                 videoUrl={selectedVideoUrl}
-                results={results}
+                results={demoResults}
                 title='Input Video Overlay Surface'
                 sharedPlaybackEnabled={sharedPlaybackEnabled}
                 sharedFrameIndex={sharedFrameIndex}
                 onSharedFrameIndexChange={setSharedFrameIndex}
                 sharedFps={sharedOverlayFps}
                 onSharedFpsChange={setSharedOverlayFps}
+                playerShotGrid={playerShotGrid}
               />
             </Card.Body>
           </Card>
@@ -441,7 +465,7 @@ function App() {
           <Card className='main-surface-card h-100 shadow-sm'>
             <Card.Body>
               <RenderTopDown
-                results={results}
+                results={demoResults}
                 sharedPlaybackEnabled={sharedPlaybackEnabled}
                 sharedFrameIndex={sharedFrameIndex}
                 onSharedFrameIndexChange={setSharedFrameIndex}
