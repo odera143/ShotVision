@@ -10,6 +10,7 @@ import { Alert, Button, Stack } from 'react-bootstrap';
 
 type RenderTopDownProps = {
   results: InferenceSummary | null;
+  basketSide: 'LEFT' | 'RIGHT';
   sharedPlaybackEnabled?: boolean;
   sharedFrameIndex?: number;
   onSharedFrameIndexChange?: (frameIndex: number) => void;
@@ -46,6 +47,7 @@ const getCourtPositionForFrame = (
 
 const RenderTopDown = ({
   results,
+  basketSide,
   sharedPlaybackEnabled = false,
   sharedFrameIndex,
   onSharedFrameIndexChange,
@@ -131,6 +133,15 @@ const RenderTopDown = ({
     [resolvedFrameIndex, results],
   );
 
+  const displayCourtPosition = useMemo(() => {
+    if (!currentCourtPosition) {
+      return null;
+    }
+
+    const [x, y] = currentCourtPosition;
+    return [basketSide === 'RIGHT' ? -x : x, y] as [number, number];
+  }, [basketSide, currentCourtPosition]);
+
   const setFrameIndex = (nextFrameIndex: number) => {
     const clamped = clampFrameIndex(nextFrameIndex);
 
@@ -153,7 +164,7 @@ const RenderTopDown = ({
         </p>
       </div>
       <HalfCourt
-        handlerXY={currentCourtPosition}
+        handlerXY={displayCourtPosition}
       />
       {!currentFrame && (
         <Alert variant='secondary' className='mb-0'>

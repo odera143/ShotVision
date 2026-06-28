@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   Col,
+  Collapse,
   Container,
   Form,
   OverlayTrigger,
@@ -16,11 +17,7 @@ import {
 import type { ChangeEvent } from 'react';
 import type { RunInferenceOptions } from './features/inference/types/RunInferenceOptions';
 import type { InferenceJob } from './features/inference/types/InferenceJob';
-import type {
-  InferenceSummary,
-  PossessionOnlyInferenceSummary,
-} from './features/inference/types/InferenceSummary';
-import testInferenceResults from './test-data/results.json';
+import type { InferenceSummary } from './features/inference/types/InferenceSummary';
 import RenderTopDown from './features/render/RenderTopDown';
 import VideoOverlayPlayer from './features/render/VideoOverlayPlayer';
 import PlayerForm from './features/PlayerForm';
@@ -54,9 +51,7 @@ function App() {
   );
   const [playerShotRadiusFt, setPlayerShotRadiusFt] = useState(5);
   const [playerShotMinAttempts, setPlayerShotMinAttempts] = useState(3);
-
-  const demoResults =
-    testInferenceResults as unknown as PossessionOnlyInferenceSummary;
+  const [isSetupOpen, setIsSetupOpen] = useState(true);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files?.[0] || null);
@@ -234,207 +229,236 @@ function App() {
       </Alert>
 
       <Card className='mb-3 mb-xl-4 shadow-sm'>
-        <Card.Body className='p-3 p-md-4'>
-          <Row className='g-3 g-xl-4 align-items-start'>
-            <Col lg={5}>
-              <Stack gap={3}>
-                <Form.Group>
-                  <Form.Label className='fw-semibold'>Video File</Form.Label>
-                  <Form.Control
-                    type='file'
-                    accept='.mp4'
-                    onChange={(e) =>
-                      handleFileChange(e as ChangeEvent<HTMLInputElement>)
-                    }
-                  />
-                  <Form.Text className='text-body-secondary'>
-                    {file ? `Selected: ${file.name}` : 'No file selected yet.'}
-                  </Form.Text>
-                </Form.Group>
-
-                <div className='d-flex gap-2'>
-                  <Button
-                    disabled={
-                      !file || jobStatus === 'queued' || jobStatus === 'running'
-                    }
-                    onClick={handleSubmit}
-                  >
-                    {jobStatus === 'queued' || jobStatus === 'running' ? (
-                      <>
-                        <Spinner size='sm' animation='border' as='span' />
-                        &nbsp;<span>{jobStatus}</span>
-                      </>
-                    ) : (
-                      'Process Video'
-                    )}
-                  </Button>
-                </div>
-              </Stack>
-            </Col>
-
-            <Col lg={7}>
-              <Form>
-                <Row className='g-3'>
-                  <Col md={6} xl={4}>
+        <Card.Header className='bg-body d-flex align-items-center justify-content-between gap-3 p-3'>
+          <div>
+            <h2 className='h5 mb-1'>Video Setup</h2>
+            <p className='text-body-secondary mb-0'>
+              {file ? `Selected: ${file.name}` : 'No video selected yet.'}
+            </p>
+          </div>
+          <Button
+            variant='outline-secondary'
+            size='sm'
+            aria-controls='video-setup-collapse'
+            aria-expanded={isSetupOpen}
+            onClick={() => setIsSetupOpen((value) => !value)}
+          >
+            {isSetupOpen ? 'Hide' : 'Show'}
+          </Button>
+        </Card.Header>
+        <Collapse in={isSetupOpen}>
+          <div id='video-setup-collapse'>
+            <Card.Body className='p-3 p-md-4'>
+              <Row className='g-3 g-xl-4 align-items-start'>
+                <Col lg={5}>
+                  <Stack gap={3}>
                     <Form.Group>
                       <Form.Label className='fw-semibold'>
-                        {renderLabelWithTooltip(
-                          'Save Debug Overlay',
-                          'Returns an output video from the pipeline with all detections overlaid.',
-                        )}
-                      </Form.Label>
-                      <Form.Select
-                        value={options.saveOverlays ? 'yes' : 'no'}
-                        onChange={(e) =>
-                          setOptions({
-                            ...options,
-                            saveOverlays: e.target.value === 'yes',
-                          })
-                        }
-                      >
-                        <option value='no'>No</option>
-                        <option value='yes'>Yes</option>
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-
-                  <Col md={6} xl={4}>
-                    <Form.Group>
-                      <Form.Label className='fw-semibold'>
-                        {renderLabelWithTooltip(
-                          'Basket Side',
-                          'Choose which side of the frame contains the visible hoop so the paint homography is oriented correctly.',
-                        )}
-                      </Form.Label>
-                      <Form.Select
-                        value={options.basketSide}
-                        onChange={(e) =>
-                          setOptions({
-                            ...options,
-                            basketSide: e.target.value as 'LEFT' | 'RIGHT',
-                          })
-                        }
-                      >
-                        <option value='LEFT'>Left</option>
-                        <option value='RIGHT'>Right</option>
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-
-                  <Col md={6} xl={4}>
-                    <Form.Group>
-                      <Form.Label className='fw-semibold'>
-                        {renderLabelWithTooltip(
-                          'Device',
-                          'Select GPU for faster inference when CUDA is available, or CPU if you want to run without the graphics card.',
-                        )}
-                      </Form.Label>
-                      <Form.Select
-                        value={options.device}
-                        onChange={(e) =>
-                          setOptions({
-                            ...options,
-                            device: e.target.value as 'CPU' | 'GPU',
-                          })
-                        }
-                      >
-                        <option value='CPU'>CPU</option>
-                        <option value='GPU'>GPU</option>
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-
-                  <Col md={6} xl={4}>
-                    <Form.Group>
-                      <Form.Label className='fw-semibold'>
-                        {renderLabelWithTooltip(
-                          'Frame Step',
-                          'Processes every Nth frame. Higher values run faster but skip more frames.',
-                        )}
+                        Video File
                       </Form.Label>
                       <Form.Control
-                        type='number'
-                        min={1}
-                        value={options.frameStep}
+                        type='file'
+                        accept='.mp4'
                         onChange={(e) =>
-                          setOptions({
-                            ...options,
-                            frameStep: parseInt(e.target.value) || 1,
-                          })
+                          handleFileChange(e as ChangeEvent<HTMLInputElement>)
                         }
                       />
+                      <Form.Text className='text-body-secondary'>
+                        {file
+                          ? `Selected: ${file.name}`
+                          : 'No file selected yet.'}
+                      </Form.Text>
                     </Form.Group>
-                  </Col>
 
-                  <Col md={6} xl={4}>
-                    <Form.Group>
-                      <Form.Label className='fw-semibold'>
-                        {renderLabelWithTooltip(
-                          'Results Mode',
-                          'Choose whether the API should return the full run summary or only the possession data needed for the court-view UI.',
-                        )}
-                      </Form.Label>
-                      <Form.Select
-                        value={options.resultsMode}
-                        onChange={(e) =>
-                          setOptions({
-                            ...options,
-                            resultsMode: e.target.value as
-                              | 'FULL'
-                              | 'POSSESSION_ONLY',
-                          })
+                    <div className='d-flex gap-2'>
+                      <Button
+                        disabled={
+                          !file ||
+                          jobStatus === 'queued' ||
+                          jobStatus === 'running'
                         }
+                        onClick={handleSubmit}
                       >
-                        <option value='POSSESSION_ONLY'>Possession only</option>
-                        <option disabled value='FULL'>
-                          Full summary - Disabled
-                        </option>
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-
-                  <Col md={6} xl={4}>
-                    <Form.Group>
-                      <Form.Label className='fw-semibold'>
-                        {renderLabelWithTooltip(
-                          'Hold Frames',
-                          'Keeps the current ball handler for this many uncertain frames before dropping possession.',
+                        {jobStatus === 'queued' || jobStatus === 'running' ? (
+                          <>
+                            <Spinner size='sm' animation='border' as='span' />
+                            &nbsp;<span>{jobStatus}</span>
+                          </>
+                        ) : (
+                          'Process Video'
                         )}
-                      </Form.Label>
-                      <Form.Control
-                        type='number'
-                        min={0}
-                        value={options.holdFrames}
-                        onChange={(e) =>
-                          setOptions({
-                            ...options,
-                            holdFrames: parseInt(e.target.value) || 0,
-                          })
-                        }
-                      />
-                    </Form.Group>
-                  </Col>
+                      </Button>
+                    </div>
+                  </Stack>
+                </Col>
 
-                  <Col xs={12}>
-                    <Form.Group>
-                      <Form.Check
-                        type='checkbox'
-                        label={renderLabelWithTooltip(
-                          'Sync top-down court with video',
-                          'Links the court view to the same frame index and scrub position as the browser video overlay.',
-                        )}
-                        checked={sharedPlaybackEnabled}
-                        onChange={(e) =>
-                          setSharedPlaybackEnabled(e.target.checked)
-                        }
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-              </Form>
-            </Col>
-          </Row>
-        </Card.Body>
+                <Col lg={7}>
+                  <Form>
+                    <Row className='g-3'>
+                      <Col md={6} xl={4}>
+                        <Form.Group>
+                          <Form.Label className='fw-semibold'>
+                            {renderLabelWithTooltip(
+                              'Save Debug Overlay',
+                              'Returns an output video from the pipeline with all detections overlaid.',
+                            )}
+                          </Form.Label>
+                          <Form.Select
+                            value={options.saveOverlays ? 'yes' : 'no'}
+                            onChange={(e) =>
+                              setOptions({
+                                ...options,
+                                saveOverlays: e.target.value === 'yes',
+                              })
+                            }
+                          >
+                            <option value='no'>No</option>
+                            <option value='yes'>Yes</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
+                      <Col md={6} xl={4}>
+                        <Form.Group>
+                          <Form.Label className='fw-semibold'>
+                            {renderLabelWithTooltip(
+                              'Basket Side',
+                              'Choose which side of the frame contains the visible hoop so the paint homography is oriented correctly.',
+                            )}
+                          </Form.Label>
+                          <Form.Select
+                            value={options.basketSide}
+                            onChange={(e) =>
+                              setOptions({
+                                ...options,
+                                basketSide: e.target.value as 'LEFT' | 'RIGHT',
+                              })
+                            }
+                          >
+                            <option value='LEFT'>Left</option>
+                            <option value='RIGHT'>Right</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
+                      <Col md={6} xl={4}>
+                        <Form.Group>
+                          <Form.Label className='fw-semibold'>
+                            {renderLabelWithTooltip(
+                              'Device',
+                              'Select GPU for faster inference when CUDA is available, or CPU if you want to run without the graphics card.',
+                            )}
+                          </Form.Label>
+                          <Form.Select
+                            value={options.device}
+                            onChange={(e) =>
+                              setOptions({
+                                ...options,
+                                device: e.target.value as 'CPU' | 'GPU',
+                              })
+                            }
+                          >
+                            <option value='CPU'>CPU</option>
+                            <option value='GPU'>GPU</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
+                      <Col md={6} xl={4}>
+                        <Form.Group>
+                          <Form.Label className='fw-semibold'>
+                            {renderLabelWithTooltip(
+                              'Frame Step',
+                              'Processes every Nth frame. Higher values run faster but skip more frames.',
+                            )}
+                          </Form.Label>
+                          <Form.Control
+                            type='number'
+                            min={1}
+                            value={options.frameStep}
+                            onChange={(e) =>
+                              setOptions({
+                                ...options,
+                                frameStep: parseInt(e.target.value) || 1,
+                              })
+                            }
+                          />
+                        </Form.Group>
+                      </Col>
+
+                      <Col md={6} xl={4}>
+                        <Form.Group>
+                          <Form.Label className='fw-semibold'>
+                            {renderLabelWithTooltip(
+                              'Results Mode',
+                              'Choose whether the API should return the full run summary or only the possession data needed for the court-view UI.',
+                            )}
+                          </Form.Label>
+                          <Form.Select
+                            value={options.resultsMode}
+                            onChange={(e) =>
+                              setOptions({
+                                ...options,
+                                resultsMode: e.target.value as
+                                  | 'FULL'
+                                  | 'POSSESSION_ONLY',
+                              })
+                            }
+                          >
+                            <option value='POSSESSION_ONLY'>
+                              Possession only
+                            </option>
+                            <option disabled value='FULL'>
+                              Full summary - Disabled
+                            </option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
+                      <Col md={6} xl={4}>
+                        <Form.Group>
+                          <Form.Label className='fw-semibold'>
+                            {renderLabelWithTooltip(
+                              'Hold Frames',
+                              'Keeps the current ball handler for this many uncertain frames before dropping possession.',
+                            )}
+                          </Form.Label>
+                          <Form.Control
+                            type='number'
+                            min={0}
+                            value={options.holdFrames}
+                            onChange={(e) =>
+                              setOptions({
+                                ...options,
+                                holdFrames: parseInt(e.target.value) || 0,
+                              })
+                            }
+                          />
+                        </Form.Group>
+                      </Col>
+
+                      <Col xs={12}>
+                        <Form.Group>
+                          <Form.Check
+                            type='checkbox'
+                            label={renderLabelWithTooltip(
+                              'Sync top-down court with video',
+                              'Links the court view to the same frame index and scrub position as the browser video overlay.',
+                            )}
+                            checked={sharedPlaybackEnabled}
+                            onChange={(e) =>
+                              setSharedPlaybackEnabled(e.target.checked)
+                            }
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Col>
+              </Row>
+            </Card.Body>
+          </div>
+        </Collapse>
       </Card>
 
       <Row className='g-3 g-xl-4 align-items-stretch mb-3 mb-xl-4'>
@@ -452,7 +476,7 @@ function App() {
             <Card.Body>
               <VideoOverlayPlayer
                 videoUrl={selectedVideoUrl}
-                results={demoResults}
+                results={results}
                 title='Input Video Overlay Surface'
                 sharedPlaybackEnabled={sharedPlaybackEnabled}
                 sharedFrameIndex={sharedFrameIndex}
@@ -471,7 +495,8 @@ function App() {
           <Card className='main-surface-card h-100 shadow-sm'>
             <Card.Body>
               <RenderTopDown
-                results={demoResults}
+                results={results}
+                basketSide={job?.basket_side ?? options.basketSide}
                 sharedPlaybackEnabled={sharedPlaybackEnabled}
                 sharedFrameIndex={sharedFrameIndex}
                 onSharedFrameIndexChange={setSharedFrameIndex}
